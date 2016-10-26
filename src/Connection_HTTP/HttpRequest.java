@@ -12,7 +12,7 @@ import java.util.zip.InflaterInputStream;
 
 public class HttpRequest {
     /**
-     * 向指定URL发送GET方法的请求
+     * Envoyer un request GET a un certain URL
      * 
      * @param url
      *            une partie de URL pour appel le API
@@ -46,10 +46,10 @@ public class HttpRequest {
             String line;
             while((line=in.readLine())!=null) {
                 response.append(line);
-                //response.append('\r');
+                response.append('\r');
             }
         } catch (Exception e) {
-            System.out.println("发送GET请求出现异常！" + e);
+            System.out.println("Il y a des problemes en envoyant request GET !" + e);
             e.printStackTrace();
         }
         return response.toString();
