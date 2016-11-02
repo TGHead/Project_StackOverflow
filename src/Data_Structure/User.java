@@ -1,5 +1,7 @@
 package Data_Structure;
 
+import java.util.HashMap;
+
 public class User {
 	long reputation;
 	long user_id;
@@ -121,5 +123,18 @@ public class User {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	
+	public static User MaptoC_User(HashMap<String,Object> user) {
+		return new User((long)user.get("reputation"), 
+				(long)user.get("user_id"), 
+				(String)user.get("user_type"), 
+				(float)user.get("accept_rate"), 
+				(String)user.get("profile_image"), 
+				(String)user.get("display_name"), 
+				(String)user.get("link"));
+	}
+	/*
+	public static HashMap<String,Object> C_UsertoMap(User u) {
+		HashMap<String, Object> map = {"reputation" : u.getReputation(), "user_id" : u.getUser_id(), "user_type" : u.getUser_type(), "accept_rate" : u.getAccept_rate(), "profile_image" : u.getProfile_image(), "display_name" : u.getDisplay_name()};
+	}
+	*/
 }

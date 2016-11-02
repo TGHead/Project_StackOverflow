@@ -1,5 +1,7 @@
 package Data_Structure;
 
+import java.util.HashMap;
+
 public class Tag {
 	boolean has_synonyms;
 	boolean is_moderator_only;
@@ -90,4 +92,11 @@ public class Tag {
 				+ is_required + ", count=" + count + ", name=" + name + "]";
 	}
 	
+	public static Tag MaptoC_Tag(HashMap<String,Object> tag) {
+		return new Tag((boolean)tag.get("has_synonyms"), 
+				(boolean)tag.get("is_moderator_only"), 
+				(boolean)tag.get("is_required"), 
+				(long)tag.get("count"), 
+				(String)tag.get("name"));
+	}
 }

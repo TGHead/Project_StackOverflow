@@ -29,8 +29,9 @@ public class HttpRequest {
         try {
             String urlNameString = url + "?" + param;
             URL realUrl = new URL(urlNameString);
-            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("cache.univ-st-etienne.fr", 3128));
-            URLConnection connection = realUrl.openConnection(proxy);
+            //Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("cache.univ-st-etienne.fr", 3128));
+            //URLConnection connection = realUrl.openConnection(proxy);
+            URLConnection connection = realUrl.openConnection();
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent",
