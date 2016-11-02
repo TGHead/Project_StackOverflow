@@ -57,4 +57,14 @@ public class JSON_Converter {
 	    }
 	    return list;
 	}
+	
+	public static List<User> User_fromJMap(Map<String, Object> JSON_Map){
+		List<User> u_list = new ArrayList<User>();
+		ArrayList<HashMap<String, Object>> items = (ArrayList)JSON_Map.get("items");
+		for(HashMap<String,Object> user : items) {
+			u_list.add(User.MaptoC_User((HashMap<String,Object>)user.get("user")));
+		}
+		return u_list;
+	}
+	
 }

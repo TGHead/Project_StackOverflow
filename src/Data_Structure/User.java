@@ -124,13 +124,13 @@ public class User {
 		this.link = link;
 	}
 	public static User MaptoC_User(HashMap<String,Object> user) {
-		return new User((long)user.get("reputation"), 
-				(long)user.get("user_id"), 
-				(String)user.get("user_type"), 
-				(float)user.get("accept_rate"), 
-				(String)user.get("profile_image"), 
-				(String)user.get("display_name"), 
-				(String)user.get("link"));
+		return new User(user.containsKey("reputation")?Long.valueOf((Integer)user.get("reputation")):-1, 
+				user.containsKey("user_id")?Long.valueOf((Integer)user.get("user_id")):-1, 
+				user.containsKey("user_type")?(String)user.get("user_type"):"UNKNOWN", 
+				user.containsKey("accept_rate")?Float.valueOf((Integer)user.get("accept_rate")):-1, 
+				user.containsKey("profile_image")?(String)user.get("profile_image"):"UNKNOWN", 
+				user.containsKey("display_name")?(String)user.get("display_name"):"UNKNOWN", 
+				user.containsKey("link")?(String)user.get("link"):"UNKNOWN");
 	}
 	/*
 	public static HashMap<String,Object> C_UsertoMap(User u) {
