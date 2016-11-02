@@ -1,1 +1,1 @@
-C'est la premier etape pour connecter avec le serveur pour recuperer des donnees par la methode GET;
+C'est la première étape pour se connecter avec le serveur pour récuperer des données par la méthode GET;

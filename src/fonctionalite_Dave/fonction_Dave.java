@@ -25,7 +25,7 @@ public class fonction_Dave {
 		String nombre = sc.next();
 		String requete1 = "https://api.stackexchange.com/2.2/tags/" + sujet + "/top-answerers/all_time";
 		String requete2 = "page=1&pagesize=" + nombre + "&site=stackoverflow";
-		//System.out.println(requete1 +", " + requete2);
+		System.out.println(requete1 +", " + requete2);
 		String s = HttpRequest.sendGet(requete1, requete2);
 		/*String s = HttpRequest.sendGet("https://api.stackexchange.com/2.2/tags/java/top-answerers/all_time", "page=1&pagesize=5&site=stackoverflow");*/
         Map JSON_Map = JSON_Converter.jsonToMap(s);
