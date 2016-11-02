@@ -1,0 +1,5 @@
+[http]
+	proxy = http://cache.univ-st-etienne.fr:3128
+[user]
+	email = etienne.du04@hotmail.fr
+	name = CAPON-Etienne
