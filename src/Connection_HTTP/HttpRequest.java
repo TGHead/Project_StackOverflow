@@ -3,6 +3,8 @@ package Connection_HTTP;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -27,7 +29,8 @@ public class HttpRequest {
         try {
             String urlNameString = url + "?" + param;
             URL realUrl = new URL(urlNameString);
-            URLConnection connection = realUrl.openConnection();
+            Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("cache.univ-st-etienne.fr", 3128));
+            URLConnection connection = realUrl.openConnection(proxy);
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent",
