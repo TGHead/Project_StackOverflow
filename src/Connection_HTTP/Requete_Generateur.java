@@ -4,14 +4,8 @@ import java.util.Scanner;
 
 public class Requete_Generateur {
 	
-	public static String Fonction_Tags(int flag) throws Exception{
-		String URL = "https://api.stackexchange.com/2.2/tags";
-		if (flag == 0){
-			return URL;
-		}
-		else {
-			throw new Exception("Passer une parametre illegale!");
-		}
+	public static String Fonction_Tags() {
+		return "https://api.stackexchange.com/2.2/tags";
 		//System.out.println(requete);
 	}
 	
@@ -26,6 +20,11 @@ public class Requete_Generateur {
 	}
 	
 	public static String GET_Parameters(String para) {
+		String Parameter = "page=1&pagesize=" + para + "&site=stackoverflow";
+		return Parameter;
+	}
+	
+	public static String GET_Parameters(int para) {
 		String Parameter = "page=1&pagesize=" + para + "&site=stackoverflow";
 		return Parameter;
 	}

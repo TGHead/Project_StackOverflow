@@ -1,14 +1,14 @@
 package fonctionalite_Dave;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-
-import javax.sql.rowset.spi.TransactionalWriter;
 
 import org.json.JSONException;
 
+import Base_de_Donnees.Operation_BDD;
 import Connection_HTTP.*;
 import Data_Structure.*;
 import IO_operation.Input_Keyboard;
@@ -30,7 +30,7 @@ public class fonction_Dave {
 			    }  
 			}  
 		}
-		if (choix.equals("2")) {
+		else if (choix.equals("2")) {
 			for(int i = 0; i < sortList.size(); i++){  
 			    for(int j = i + 1; j < sortList.size(); j++){  
 			    	if((Integer)sortList.get(i).get("score") < (Integer)sortList.get(j).get("score")){  
@@ -55,16 +55,46 @@ public class fonction_Dave {
 	
 	public static void main(String[] args) throws IOException, JSONException {
 		
+		String json_str_tags = HttpRequest.sendGet(Requete_Generateur.Fonction_Tags(),Requete_Generateur.GET_Parameters(20));
+		
+		HashMap<String, Object> JSON_Map_tags = JSON_Converter.jsonToMap(json_str_tags);
+		
+		ArrayList<Tag> Tags_List = Tag.JSON_ListtoTag_List((ArrayList)JSON_Map_tags.get("items"));
+		
+		Connection Conn_BDD = Operation_BDD.Derby_Connexion();
+		
+		Operation_BDD.Create_Table_Tags(Conn_BDD);
+		
+		for(Tag tag : Tags_List) {
+			Operation_BDD.Insert_Into_Table_Tags(Conn_BDD, tag);
+		}
+		
+		ArrayList<Tag> Tags_List_New = Operation_BDD.Select_Table_Tags(Conn_BDD);
+		
+		System.out.println(Tags_List_New);
+		
+		//Operation_BDD.Derby_DisConnexion(Conn_BDD);
+		
+		
+		
 		String sujet = Input_Keyboard.Get_String("Veuillez entrer un sujet.");
 		
 		String nombre = Input_Keyboard.Get_String("Veuillez entrer le nombre de personnes a chercher.");
 		
-		String json_str = HttpRequest.sendGet(Requete_Generateur.Fonction_Tags(1,sujet),Requete_Generateur.GET_Parameters(nombre));
+		String json_str_tags_answerers = HttpRequest.sendGet(Requete_Generateur.Fonction_Tags(1,sujet),Requete_Generateur.GET_Parameters(nombre));
 		
-        Map JSON_Map = JSON_Converter.jsonToMap(json_str);
+        HashMap<String, Object> JSON_Map_tags_answerers = JSON_Converter.jsonToMap(json_str_tags_answerers);
+        
+        ArrayList<TagsAnswerers> TagsAnswerers_List = TagsAnswerers.JSON_ListtoTagsAnswerers_List((ArrayList)JSON_Map_tags_answerers.get("items"), sujet);
+        
+        for(TagsAnswerers tag_answerers : TagsAnswerers_List) {
+			Operation_BDD.Insert_Into_Table_TagsAnswerers(Conn_BDD, tag_answerers);
+		}
         
         String choix = Input_Keyboard.Get_String("Veuillez choisir la methode pour trier:\n1. Par le nombre de poser des reponses\n2. Par des scores qu'il est recu\n");
         
+        ArrayList<TagsAnswerers> TagsAnswerers_List_new = Operation_BDD.Select_Table_TagsAnswerers(Conn_BDD, choix);
+        /*
         String result = null;
 		try {
 			result = Tri_resultat(choix,JSON_Map);
@@ -72,9 +102,9 @@ public class fonction_Dave {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
+        */
         //List<User> ulist = JSON_Converter.User_fromJMap(JSON_Map);
-		System.out.println(result);
-		resultat_Frame f = new resultat_Frame("Fonction_Dave",result);
+		System.out.println(TagsAnswerers_List_new);
+		//resultat_Frame f = new resultat_Frame("Fonction_Dave",result);
 	}
 }

@@ -11,10 +11,10 @@ import org.json.JSONObject;
 
 public class JSON_Converter {
 	
-	public static Map<String, Object> jsonToMap(String jsonString) throws JSONException {
+	public static HashMap<String, Object> jsonToMap(String jsonString) throws JSONException {
 		JSONObject jsonObject = new JSONObject(jsonString);
 		
-	    Map<String, Object> retMap = new HashMap<String, Object>();
+	    HashMap<String, Object> retMap = new HashMap<String, Object>();
 
 	    if(jsonObject != JSONObject.NULL) {
 	        retMap = toMap(jsonObject);
@@ -22,8 +22,8 @@ public class JSON_Converter {
 	    return retMap;
 	}
 
-	public static Map<String, Object> toMap(JSONObject object) throws JSONException {
-	    Map<String, Object> map = new HashMap<String, Object>();
+	public static HashMap<String, Object> toMap(JSONObject object) throws JSONException {
+	    HashMap<String, Object> map = new HashMap<String, Object>();
 
 	    Iterator<String> keysItr = object.keys();
 	    while(keysItr.hasNext()) {
