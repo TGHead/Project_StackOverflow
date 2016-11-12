@@ -18,41 +18,6 @@ import IO_operation.Input_Keyboard;
 
 public class fonction_Dave {
 
-	public static String Tri_resultat(String choix, Map json_map) throws Exception {
-		String Str = "";
-		ArrayList<Map<String, Object>> sortList = (ArrayList) json_map.get("items");
-		if (choix.equals("1")) {
-			for (int i = 0; i < sortList.size(); i++) {
-				for (int j = i + 1; j < sortList.size(); j++) {
-					if ((Integer) sortList.get(i).get("post_count") < (Integer) sortList.get(j).get("post_count")) {
-						Map<String, Object> temp = sortList.get(i);
-						sortList.set(i, sortList.get(j));
-						sortList.set(j, temp);
-					}
-				}
-			}
-		} else if (choix.equals("2")) {
-			for (int i = 0; i < sortList.size(); i++) {
-				for (int j = i + 1; j < sortList.size(); j++) {
-					if ((Integer) sortList.get(i).get("score") < (Integer) sortList.get(j).get("score")) {
-						Map<String, Object> temp = sortList.get(i);
-						sortList.set(i, sortList.get(j));
-						sortList.set(j, temp);
-					}
-				}
-			}
-		} else {
-			// throw new Exception("parametre illegale!");
-		}
-		for (int i = 0; i < sortList.size(); i++) {
-			Str += (i + 1) + ". Name: " + ((Map) sortList.get(i).get("user")).get("display_name") + "\n"
-					+ " post_count: " + sortList.get(i).get("post_count") + "\n" + " score: "
-					+ sortList.get(i).get("score") + "\n" + " link: " + ((Map) sortList.get(i).get("user")).get("link")
-					+ "\n";
-		}
-		return Str;
-	}
-
 	public static void main(String[] args) throws IOException, JSONException {
 
 		String json_str_tags = HttpRequest.sendGet(Requete_Generateur.Fonction_Tags(),
