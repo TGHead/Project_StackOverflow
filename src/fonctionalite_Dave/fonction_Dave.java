@@ -87,6 +87,8 @@ public class fonction_Dave {
         
         ArrayList<TagsAnswerers> TagsAnswerers_List = TagsAnswerers.JSON_ListtoTagsAnswerers_List((ArrayList)JSON_Map_tags_answerers.get("items"), sujet);
         
+        Operation_BDD.Create_Tables_TagsAnswerers(Conn_BDD);
+        
         for(TagsAnswerers tag_answerers : TagsAnswerers_List) {
 			Operation_BDD.Insert_Into_Table_TagsAnswerers(Conn_BDD, tag_answerers);
 		}

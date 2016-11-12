@@ -112,7 +112,7 @@ public class Operation_BDD {
 			System.out.println("Creer la table_TagsAnswerers echoue!");
 		}
 		else {
-			String requete = "CREATE TABLE PROJET_STACKEXCHANGE.tags_answerers (user_id INT PRIMARY KEY, user_name VARCHAR(128), tag_name VARCHAR(20) PRIMARY KEY, post_count INT, score INT)";
+			String requete = "CREATE TABLE PROJET_STACKEXCHANGE.tags_answerers (user_id INT NOT NULL, user_name VARCHAR(128), tag_name VARCHAR(20) NOT NULL, post_count INT, score INT, PRIMARY KEY (user_id, tag_name))";
 			Statement laRequete = null;
 			try {
 				laRequete = laConnexion.createStatement();
@@ -222,7 +222,7 @@ public class Operation_BDD {
 			System.out.println("Inserer dans la table_TagsAnswerers echoue!");
 		}
 		else {
-			String requete = "INSERT INTO PROJET_STACKEXCHANGE.tags VALUES(?, ?, ?, ?, ?)";
+			String requete = "INSERT INTO PROJET_STACKEXCHANGE.tags_answerers VALUES(?, ?, ?, ?, ?)";
 			PreparedStatement laRequete = null;
 			try {
 				laConnexion.setAutoCommit(false);
@@ -248,7 +248,6 @@ public class Operation_BDD {
 					laRequete.close();
 					laConnexion.setAutoCommit(false);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -307,15 +306,15 @@ public class Operation_BDD {
 		else {
 			ArrayList<TagsAnswerers> list_tag_answerers = new ArrayList<TagsAnswerers>();
 			try {
-				String requete = "SELECT * FROM PROJET_STACKEXCHANGE.tag_answerers";
+				String requete = "SELECT * FROM PROJET_STACKEXCHANGE.tags_answerers ";
 				Statement laRequete = laConnexion.createStatement();
-				if(para == "1"){
+				if(para.equals("1")){
 					//tirer par post_count
-					requete += "ORDER BY post_count DESC;";
+					requete += "ORDER BY post_count DESC";
 				}
 				else {
 					//tirer par score
-					requete += "ORDER BY score DESC;";
+					requete += "ORDER BY score DESC";
 				}
 				ResultSet leResultat = laRequete.executeQuery(requete);
 				while (leResultat.next()) {
