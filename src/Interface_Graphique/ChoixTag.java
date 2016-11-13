@@ -77,25 +77,36 @@ public class ChoixTag {
 				try {
 					nbSujet = Integer.parseInt(textField.getText());
 					textField.setText("");
-					frame.getContentPane().remove(panelNbSujet);
-					JLabel label = new JLabel("Entrez le sujet que vous voulez chercher");
-					JPanel panelLabel = new JPanel();
-					JPanel panelText = new JPanel();
-					JPanel panelButton = new JPanel();
-					panelLabel.add(label);
-					panelText.add(textField2);
-					panelButton.add(valider2);
-					panelNomSujet.add(panelLabel);
-					panelNomSujet.add(panelText);
-					panelNomSujet.add(panelButton);
-					frame.getContentPane().add(panelNomSujet);
-					frame.pack();
-					frame.setVisible(true);
-
+					if (nbSujet < 1) {
+						JPanel err = new JPanel();
+						err.add(erreur);
+						textField.setText("");
+						frame.getContentPane().remove(panelNbSujet);
+						panelNbSujet.add(err);
+						frame.getContentPane().add(panelNbSujet);
+						frame.pack();
+						frame.setVisible(true);
+					} else {
+						frame.getContentPane().remove(panelNbSujet);
+						JLabel label = new JLabel("Entrez le sujet que vous voulez chercher");
+						JPanel panelLabel = new JPanel();
+						JPanel panelText = new JPanel();
+						JPanel panelButton = new JPanel();
+						panelLabel.add(label);
+						panelText.add(textField2);
+						panelButton.add(valider2);
+						panelNomSujet.add(panelLabel);
+						panelNomSujet.add(panelText);
+						panelNomSujet.add(panelButton);
+						frame.getContentPane().add(panelNomSujet);
+						frame.pack();
+						frame.setVisible(true);
+					}
 				} catch (NumberFormatException nfe) {
 					JPanel err = new JPanel();
 					err.add(erreur);
 					textField.setText("");
+					panelNbSujet.remove(err);
 					frame.getContentPane().remove(panelNbSujet);
 					panelNbSujet.add(err);
 					frame.getContentPane().add(panelNbSujet);
@@ -105,8 +116,7 @@ public class ChoixTag {
 
 			}
 			if (e.getSource() == valider2 || e.getSource() == textField2) {
-				if (textField2.getText() != null)
-					sujet_list.add(textField2.getText());
+				sujet_list.add(textField2.getText());
 				textField2.setText("");
 				if (sujet_list.size() == nbSujet) {
 					frame.getContentPane().remove(panelNomSujet);
@@ -128,24 +138,35 @@ public class ChoixTag {
 
 			if (e.getSource() == valider3 || e.getSource() == textField3) {
 				try {
-					Integer.parseInt(textField3.getText());
-					nbResultat = textField3.getText();
-					textField3.setText("");
-					frame.getContentPane().remove(panelNbResultat);
-					JLabel label = new JLabel("Choisissez la méthode pour trier les résultats");
-					JPanel panelLabel = new JPanel();
-					JPanel panelButton1 = new JPanel();
-					JPanel panelButton2 = new JPanel();
-					panelLabel.add(label);
-					panelButton1.add(methode1);
-					panelButton2.add(methode2);
-					panelMethode.add(panelLabel);
-					panelMethode.add(panelButton1);
-					panelMethode.add(panelButton2);
-					frame.getContentPane().add(panelMethode);
-					frame.pack();
-					frame.setVisible(true);
-
+					int i;
+					i = Integer.parseInt(textField3.getText());
+					if (i < 1) {
+						JPanel err = new JPanel();
+						err.add(erreur);
+						textField3.setText("");
+						frame.getContentPane().remove(panelNbResultat);
+						panelNbResultat.add(err);
+						frame.getContentPane().add(panelNbResultat);
+						frame.pack();
+						frame.setVisible(true);
+					} else {
+						nbResultat = textField3.getText();
+						textField3.setText("");
+						frame.getContentPane().remove(panelNbResultat);
+						JLabel label = new JLabel("Choisissez la méthode pour trier les résultats");
+						JPanel panelLabel = new JPanel();
+						JPanel panelButton1 = new JPanel();
+						JPanel panelButton2 = new JPanel();
+						panelLabel.add(label);
+						panelButton1.add(methode1);
+						panelButton2.add(methode2);
+						panelMethode.add(panelLabel);
+						panelMethode.add(panelButton1);
+						panelMethode.add(panelButton2);
+						frame.getContentPane().add(panelMethode);
+						frame.pack();
+						frame.setVisible(true);
+					}
 				} catch (NumberFormatException nfe) {
 					JPanel err = new JPanel();
 					err.add(erreur);
