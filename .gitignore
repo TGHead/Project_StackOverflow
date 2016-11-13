@@ -123,5 +123,15 @@ Temporary Items
 *.war
 *.ear
 
+### Derby ###
+
+*.dat
+db.lck
+derby.log
+log.ctrl
+logmirror.ctrl
+README_DO_NOT_TOUCH_FILES.txt
+service.properties
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
