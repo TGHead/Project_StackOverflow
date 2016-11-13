@@ -67,6 +67,7 @@ public class Operation_BDD {
 			finally {
 				try {
 					laRequete.close();
+					laConnexion.commit();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -99,6 +100,7 @@ public class Operation_BDD {
 			finally {
 				try {
 					laRequete.close();
+					laConnexion.commit();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -131,6 +133,7 @@ public class Operation_BDD {
 			finally {
 				try {
 					laRequete.close();
+					laConnexion.commit();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -208,7 +211,7 @@ public class Operation_BDD {
 			finally {
 				try {
 					laRequete.close();
-					laConnexion.setAutoCommit(false);
+					laConnexion.setAutoCommit(true);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -227,8 +230,8 @@ public class Operation_BDD {
 			try {
 				laConnexion.setAutoCommit(false);
 				laRequete = laConnexion.prepareStatement(requete);
-				laRequete.setLong(1, tag_answerers.getUser_id());
-				laRequete.setString(2, tag_answerers.getUser_name());
+				laRequete.setLong(1, tag_answerers.getUser().getUser_id());
+				laRequete.setString(2, tag_answerers.getUser().getDisplay_name());
 				laRequete.setString(3, tag_answerers.getTag_name());
 				laRequete.setInt(4, tag_answerers.getPost_count());
 				laRequete.setInt(5, tag_answerers.getScore());
@@ -246,8 +249,83 @@ public class Operation_BDD {
 			finally {
 				try {
 					laRequete.close();
-					laConnexion.setAutoCommit(false);
+					laConnexion.setAutoCommit(true);
 				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static void Delete_Table_Tags(Connection laConnexion) {
+		if (laConnexion == null) {
+			System.out.println("Delete des contenus de la table_Tags echoue!");
+		}
+		else {
+			Statement laRequete = null;
+			try {
+				laRequete = laConnexion.createStatement();
+				laRequete.execute("DELETE FROM PROJET_STACKEXCHANGE.tags");
+				System.out.println("Effacee toutes les records dans la table tags");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					laRequete.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public static void Delete_Table_Users(Connection laConnexion) {
+		if (laConnexion == null) {
+			System.out.println("Delete des contenus de la table_Users echoue!");
+		}
+		else {
+			Statement laRequete = null;
+			try {
+				laRequete = laConnexion.createStatement();
+				laRequete.execute("DELETE FROM PROJET_STACKEXCHANGE.users");
+				System.out.println("Effacee toutes les records dans la table users");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					laRequete.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public static void Delete_Table_TagsAnswerers(Connection laConnexion) {
+		if (laConnexion == null) {
+			System.out.println("Delete des contenus de la table_TagsAnswerers echoue!");
+		}
+		else {
+			Statement laRequete = null;
+			try {
+				laRequete = laConnexion.createStatement();
+				laRequete.execute("DELETE FROM PROJET_STACKEXCHANGE.tags_answerers");
+				System.out.println("Effacee toutes les records dans la table tags_answerers");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					laRequete.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -268,6 +346,7 @@ public class Operation_BDD {
 					list_tag.add(new Tag(leResultat.getBoolean(3), leResultat.getBoolean(4), leResultat.getBoolean(5), leResultat.getLong(2), leResultat.getString(1)));
 				}
 				laRequete.close();
+				laConnexion.commit();
 			} 
 			catch (SQLException e) {
 				e.printStackTrace();
@@ -290,6 +369,7 @@ public class Operation_BDD {
 					list_user.add(new User(leResultat.getLong(2), leResultat.getLong(1), leResultat.getString(3), leResultat.getFloat(4), leResultat.getString(5), leResultat.getString(6), leResultat.getString(7)));
 				}
 				laRequete.close();
+				laConnexion.commit();
 			} 
 			catch (SQLException e) {
 				e.printStackTrace();
@@ -305,9 +385,10 @@ public class Operation_BDD {
 		}
 		else {
 			ArrayList<TagsAnswerers> list_tag_answerers = new ArrayList<TagsAnswerers>();
+			Statement laRequete = null;
 			try {
-				String requete = "SELECT * FROM PROJET_STACKEXCHANGE.tags_answerers ";
-				Statement laRequete = laConnexion.createStatement();
+				String requete = "SELECT * FROM PROJET_STACKEXCHANGE.users AS u JOIN PROJET_STACKEXCHANGE.tags_answerers AS t ON (u.user_id=t.user_id)";
+				laRequete = laConnexion.createStatement();
 				if(para.equals("1")){
 					//tirer par post_count
 					requete += "ORDER BY post_count DESC";
@@ -318,15 +399,71 @@ public class Operation_BDD {
 				}
 				ResultSet leResultat = laRequete.executeQuery(requete);
 				while (leResultat.next()) {
-					list_tag_answerers.add(new TagsAnswerers(leResultat.getLong(1), leResultat.getString(2), leResultat.getString(3), leResultat.getInt(4), leResultat.getInt(5)));
+					User user = new User(leResultat.getLong(2), leResultat.getLong(1), leResultat.getString(3), leResultat.getFloat(4), leResultat.getString(5), leResultat.getString(6),leResultat.getString(7));
+					list_tag_answerers.add(new TagsAnswerers(user, leResultat.getString(3), leResultat.getInt(4), leResultat.getInt(5)));
 				}
 				laRequete.close();
 			} 
 			catch (SQLException e) {
 				e.printStackTrace();
 			}
+			finally {
+				try {
+					laRequete.close();
+					laConnexion.commit();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			return list_tag_answerers;
 		}
 	}
 	
+	public static ArrayList<TagsAnswerers> Select_Table_PluralTagsAnswerers(Connection laConnexion, String para) {
+		if (laConnexion == null) {
+			System.out.println("Select via la table_Tags echoue!");
+			return null;
+		}
+		else {
+			ArrayList<TagsAnswerers> list_tag_answerers = new ArrayList<TagsAnswerers>();
+			Statement laRequete = null;
+			try {
+				String requete = "SELECT u.reputation, u.user_id, u.user_type, u.accept_rate, u.profile_image, u.display_name, u.link, t.sum_post_count, t.sum_score "
+						+ "FROM PROJET_STACKEXCHANGE.users AS u JOIN "
+							+ "(SELECT user_id, SUM(T.post_count) AS sum_post_count, SUM(T.score) AS sum_score "
+							+ "FROM PROJET_STACKEXCHANGE.tags_answerers AS T "
+							+ "GROUP BY user_id) AS t "
+						+ "ON (u.user_id=t.user_id) ";
+				laRequete = laConnexion.createStatement();
+				if(para.equals("1")){
+					//tirer par post_count
+					requete += "ORDER BY t.sum_post_count DESC";
+				}
+				else {
+					//tirer par score
+					requete += "ORDER BY t.sum_score DESC";
+				}
+				ResultSet leResultat = laRequete.executeQuery(requete);
+				while (leResultat.next()) {
+					User user = new User(leResultat.getLong(1), leResultat.getLong(2), leResultat.getString(3), leResultat.getFloat(4), leResultat.getString(5), leResultat.getString(6),leResultat.getString(7));
+					list_tag_answerers.add(new TagsAnswerers(user, "A set of tags", leResultat.getInt(8), leResultat.getInt(9)));
+				}
+				laRequete.close();
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			finally {
+				try {
+					laRequete.close();
+					laConnexion.commit();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return list_tag_answerers;
+		}
+	}
 }

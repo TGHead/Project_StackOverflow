@@ -14,4 +14,16 @@ public class Input_Keyboard {
 		//System.out.println(requete);
 		return str;
 	}
+	
+	public static int Get_Integer(String indication){
+		Scanner sc = new Scanner(System.in);
+		//System.out.println("Veuillez entrer un sujet.");
+		//System.out.println("Veuillez entrer le nombre de personnes a chercher.");
+		System.out.println(indication);
+		String num = sc.next();
+		sc.close();
+		//System.out.println(requete);
+		return Integer.parseInt(num);
+	}
+	
 }
