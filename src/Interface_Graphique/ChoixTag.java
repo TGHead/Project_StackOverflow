@@ -1,6 +1,5 @@
 package Interface_Graphique;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -11,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -32,6 +31,8 @@ public class ChoixTag {
 	JButton methode1 = new JButton("Trier par nombre de post");
 	JButton methode2 = new JButton("Trier par score obtenu");
 	JTextField textField = new JTextField(10);
+	JTextField textField2 = new JTextField(10);
+	JTextField textField3 = new JTextField(10);
 	JLabel erreur = new JLabel("le nombre de sujet doit être un nombre entier");
 	int nbSujet;
 	ArrayList<String> sujet_list = new ArrayList<String>();
@@ -59,6 +60,9 @@ public class ChoixTag {
 		valider3.addActionListener(listen);
 		methode1.addActionListener(listen);
 		methode2.addActionListener(listen);
+		textField.addActionListener(listen);
+		textField2.addActionListener(listen);
+		textField3.addActionListener(listen);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().add(panelNbSujet);
 		frame.pack();
@@ -69,7 +73,7 @@ public class ChoixTag {
 	public class Ecouteur implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == valider) {
+			if (e.getSource() == valider || e.getSource() == textField) {
 				try {
 					nbSujet = Integer.parseInt(textField.getText());
 					textField.setText("");
@@ -79,7 +83,7 @@ public class ChoixTag {
 					JPanel panelText = new JPanel();
 					JPanel panelButton = new JPanel();
 					panelLabel.add(label);
-					panelText.add(textField);
+					panelText.add(textField2);
 					panelButton.add(valider2);
 					panelNomSujet.add(panelLabel);
 					panelNomSujet.add(panelText);
@@ -91,6 +95,7 @@ public class ChoixTag {
 				} catch (NumberFormatException nfe) {
 					JPanel err = new JPanel();
 					err.add(erreur);
+					textField.setText("");
 					frame.getContentPane().remove(panelNbSujet);
 					panelNbSujet.add(err);
 					frame.getContentPane().add(panelNbSujet);
@@ -99,10 +104,10 @@ public class ChoixTag {
 				}
 
 			}
-			if (e.getSource() == valider2) {
-				if (textField.getText() != null)
-					sujet_list.add(textField.getText());
-				textField.setText("");
+			if (e.getSource() == valider2 || e.getSource() == textField2) {
+				if (textField2.getText() != null)
+					sujet_list.add(textField2.getText());
+				textField2.setText("");
 				if (sujet_list.size() == nbSujet) {
 					frame.getContentPane().remove(panelNomSujet);
 					JLabel label = new JLabel("Entrez le nombre de resultat à afficher");
@@ -110,7 +115,7 @@ public class ChoixTag {
 					JPanel panelText = new JPanel();
 					JPanel panelButton = new JPanel();
 					panelLabel.add(label);
-					panelText.add(textField);
+					panelText.add(textField3);
 					panelButton.add(valider3);
 					panelNbResultat.add(panelLabel);
 					panelNbResultat.add(panelText);
@@ -121,11 +126,11 @@ public class ChoixTag {
 				}
 			}
 
-			if (e.getSource() == valider3) {
+			if (e.getSource() == valider3 || e.getSource() == textField3) {
 				try {
-					Integer.parseInt(textField.getText());
-					nbResultat = textField.getText();
-					textField.setText("");
+					Integer.parseInt(textField3.getText());
+					nbResultat = textField3.getText();
+					textField3.setText("");
 					frame.getContentPane().remove(panelNbResultat);
 					JLabel label = new JLabel("Choisissez la méthode pour trier les résultats");
 					JPanel panelLabel = new JPanel();
@@ -144,6 +149,7 @@ public class ChoixTag {
 				} catch (NumberFormatException nfe) {
 					JPanel err = new JPanel();
 					err.add(erreur);
+					textField3.setText("");
 					frame.getContentPane().remove(panelNbResultat);
 					panelNbResultat.add(err);
 					frame.getContentPane().add(panelNbResultat);
@@ -169,13 +175,9 @@ public class ChoixTag {
 					e1.printStackTrace();
 				}
 				JTextArea list_de_user = new JTextArea(u_list);
-				JPanel panel = new JPanel();
-				JScrollBar vbar = new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 300);
-
-				panel.add(vbar, BorderLayout.EAST);
-				panel.add(list_de_user);
-				panelResulat.add(panel);
-				frame.getContentPane().add(panelResulat);
+				panelResulat.add(list_de_user);
+				JScrollPane jsp = new JScrollPane(panelResulat);
+				frame.getContentPane().add(jsp);
 				frame.pack();
 				frame.setVisible(true);
 			}
