@@ -16,11 +16,13 @@ import Data_Structure.TagsAnswerers;
 
 public class fonction_Dave {
 
-	public static String resultat(ArrayList<String> sujet_list, String nombre, String choix)
+	public static ArrayList<String[]> resultat(ArrayList<String> sujet_list, String nombre, String choix)
 			throws IOException, JSONException {
 
+		String wrongTags = "";
+
 		String json_str_tags = HttpRequest.sendGet(Requete_Generateur.Fonction_Tags(),
-				Requete_Generateur.GET_Parameters(1,20));
+				Requete_Generateur.GET_Parameters(1, 20));
 
 		HashMap<String, Object> JSON_Map_tags = JSON_Converter.jsonToMap(json_str_tags);
 
@@ -68,14 +70,17 @@ public class fonction_Dave {
 
 		for (String sujet : sujet_list) {
 
-			String json_str_tags_answerers = HttpRequest.sendGet(Requete_Generateur.Fonction_Tags_TopAnswerers(1, sujet),
-					Requete_Generateur.GET_Parameters("1",nombre));
+			String json_str_tags_answerers = HttpRequest.sendGet(
+					Requete_Generateur.Fonction_Tags_TopAnswerers(1, sujet),
+					Requete_Generateur.GET_Parameters("1", nombre));
 
 			HashMap<String, Object> JSON_Map_tags_answerers = JSON_Converter.jsonToMap(json_str_tags_answerers);
-
 			ArrayList<TagsAnswerers> TagsAnswerers_List = TagsAnswerers
 					.JSON_ListtoTagsAnswerers_List((ArrayList) JSON_Map_tags_answerers.get("items"), sujet);
 
+			if (TagsAnswerers_List.isEmpty()) {
+				wrongTags = wrongTags + sujet + ",";
+			}
 			for (TagsAnswerers tag_answerers : TagsAnswerers_List) {
 				Operation_BDD.Insert_Into_Table_Users(Conn_BDD, tag_answerers.getUser());
 				Operation_BDD.Insert_Into_Table_TagsAnswerers(Conn_BDD, tag_answerers);
@@ -92,14 +97,15 @@ public class fonction_Dave {
 				choix);
 
 		// System.out.println(TagsAnswerers_List_new);
-		String s = "";
+		ArrayList<String[]> tab = new ArrayList<String[]>();
 		for (TagsAnswerers tag_answerers : TagsAnswerers_List_new) {
+			String[] str = { "", "", "", "" };
 
-			s = s + "User_pseudo:" + tag_answerers.getUser().getDisplay_name() + "\n";
-			s = s + "User_Link:" + tag_answerers.getUser().getLink() + "\n";
-			s = s + "Tags_name:" + sujet_list + "\n";
-			s = s + "User_post_count (total):" + tag_answerers.getPost_count() + "\n";
-			s = s + "User_score (total):" + tag_answerers.getScore() + "\n\n";
+			str[0] = tag_answerers.getUser().getDisplay_name();
+			str[1] = tag_answerers.getUser().getLink();
+			str[2] = Integer.toString(tag_answerers.getPost_count());
+			str[3] = Integer.toString(tag_answerers.getScore());
+			tab.add(str);
 
 			System.out.println("*****************************************");
 			System.out.println("User_pseudo:" + tag_answerers.getUser().getDisplay_name());
@@ -109,9 +115,11 @@ public class fonction_Dave {
 			System.out.println("User_score (total):" + tag_answerers.getScore());
 
 		}
-
+		String[] str = { wrongTags, "", "", "" };
+		tab.add(str);
 		Operation_BDD.Derby_DisConnexion(Conn_BDD);
-		return s;
+
+		return tab;
 		// resultat_Frame f = new resultat_Frame("Fonction_Dave",result);
 	}
 }

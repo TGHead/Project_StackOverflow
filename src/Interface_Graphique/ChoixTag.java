@@ -106,7 +106,6 @@ public class ChoixTag {
 					JPanel err = new JPanel();
 					err.add(erreur);
 					textField.setText("");
-					panelNbSujet.remove(err);
 					frame.getContentPane().remove(panelNbSujet);
 					panelNbSujet.add(err);
 					frame.getContentPane().add(panelNbSujet);
@@ -187,14 +186,13 @@ public class ChoixTag {
 				frame.getContentPane().remove(panelMethode);
 				fonction_Dave f = new fonction_Dave();
 				String u_list = "";
-				try {
-					u_list = f.resultat(sujet_list, nbResultat, choix);
-				} catch (IOException e1) {
-
-					e1.printStackTrace();
-				} catch (JSONException e1) {
-					e1.printStackTrace();
-				}
+				/*
+				 * try { u_list = f.resultat(sujet_list, nbResultat, choix); }
+				 * catch (IOException e1) {
+				 * 
+				 * e1.printStackTrace(); } catch (JSONException e1) {
+				 * e1.printStackTrace(); }
+				 */
 				JTextArea list_de_user = new JTextArea(u_list);
 				panelResulat.add(list_de_user);
 				JScrollPane jsp = new JScrollPane(panelResulat);
