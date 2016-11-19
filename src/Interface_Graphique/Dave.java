@@ -127,6 +127,7 @@ public class Dave {
 			frame.getContentPane().add(panel);
 			frame.setSize(251, (int) (screenSize.getHeight() - 100));
 			frame.setVisible(true);
+			System.out.println("###");
 		}
 	}
 
