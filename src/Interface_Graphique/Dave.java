@@ -1,6 +1,8 @@
 package Interface_Graphique;
 
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -29,12 +31,15 @@ public class Dave {
 	JFrame frame = new JFrame("Dave");
 	JLabel label = new JLabel("Entrez le(s) sujet(s) à rechercher");
 	JPanel panel = new JPanel();
+	JScrollPane jsp = new JScrollPane();
 	JButton button = new JButton("OK");
 	JTextField text = new JTextField(20);
-	String s[] = { "Trier par nombre de post", "Trier par score obtenu" };
+	String s[] = { "Trier par score obtenu", "Trier par nombre de post" };
 	JComboBox<String> box = new JComboBox<String>(s);
 	JEditorPane result = new JEditorPane();
-	JScrollPane jsp = new JScrollPane();
+	ArrayList<String> list = new ArrayList<String>();
+	ArrayList<String[]> tab = new ArrayList<String[]>();
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 	public Dave() throws IOException, JSONException {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -50,34 +55,33 @@ public class Dave {
 		panel.add(panel1);
 		panel.add(panel2);
 		Ecouteur listen = new Ecouteur();
-
-		result.addHyperlinkListener(new HyperlinkListener() {
-			@Override
-			public void hyperlinkUpdate(HyperlinkEvent e) {
-				if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-					if (Desktop.isDesktopSupported()) {
-						try {
-							Desktop.getDesktop().browse(e.getURL().toURI());
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (URISyntaxException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-				}
-			}
-		});
+		EcouteurURL listener = new EcouteurURL();
+		result.addHyperlinkListener(listener);
 
 		button.addActionListener(listen);
 		frame.getContentPane().add(panel);
-		frame.setAutoRequestFocus(true);
-		frame.setLocation(100, 0);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+		result.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
 
+	}
+
+	public class EcouteurURL implements HyperlinkListener {
+		@Override
+		public void hyperlinkUpdate(HyperlinkEvent e) {
+			if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+				if (Desktop.isDesktopSupported()) {
+					try {
+						Desktop.getDesktop().browse(e.getURL().toURI());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} catch (URISyntaxException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 	public class Ecouteur implements ActionListener {
@@ -86,15 +90,14 @@ public class Dave {
 			result.setText("");
 			String recherche = text.getText();
 			String[] temp = recherche.split("[,\\ \\;]");
-			ArrayList<String> list = new ArrayList<String>();
+			list.clear();
 			for (int i = 0; i < temp.length; i++) {
 				if (!temp[i].isEmpty())
 					list.add(temp[i]);
 			}
 
 			String choix = Integer.toString(box.getSelectedIndex());
-
-			ArrayList<String[]> tab = new ArrayList<String[]>();
+			tab.clear();
 			try {
 				tab = f.resultat(list, "20", choix);
 			} catch (IOException e1) {
@@ -115,17 +118,16 @@ public class Dave {
 						+ tab.get(i)[2] + "<br>Score obtenu : " + tab.get(i)[3] + "<br><br>";
 			}
 
-			result.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
 			result.setText(s);
+			frame.getContentPane().remove(panel);
 			jsp.setViewportView(result);
 			panel.add(jsp);
 			result.setCaretPosition(0);
 			result.setEditable(false);
-			frame.getContentPane().remove(panel);
 			frame.getContentPane().add(panel);
-			frame.pack();
+			frame.setSize(251, (int) (screenSize.getHeight() - 100));
 			frame.setVisible(true);
-
+			System.out.println("###");
 		}
 	}
 

@@ -98,6 +98,7 @@ public class fonction_Dave {
 
 		// System.out.println(TagsAnswerers_List_new);
 		ArrayList<String[]> tab = new ArrayList<String[]>();
+		tab.clear();
 		for (TagsAnswerers tag_answerers : TagsAnswerers_List_new) {
 			String[] str = { "", "", "", "" };
 
@@ -106,14 +107,18 @@ public class fonction_Dave {
 			str[2] = Integer.toString(tag_answerers.getPost_count());
 			str[3] = Integer.toString(tag_answerers.getScore());
 			tab.add(str);
-
-			System.out.println("*****************************************");
-			System.out.println("User_pseudo:" + tag_answerers.getUser().getDisplay_name());
-			System.out.println("User_Link:" + tag_answerers.getUser().getLink());
-			System.out.println("Tags_name:" + sujet_list);
-			System.out.println("User_post_count (total):" + tag_answerers.getPost_count());
-			System.out.println("User_score (total):" + tag_answerers.getScore());
-
+			/*
+			 * System.out.println("*****************************************");
+			 * System.out.println("User_pseudo:" +
+			 * tag_answerers.getUser().getDisplay_name());
+			 * System.out.println("User_Link:" +
+			 * tag_answerers.getUser().getLink());
+			 * System.out.println("Tags_name:" + sujet_list);
+			 * System.out.println("User_post_count (total):" +
+			 * tag_answerers.getPost_count());
+			 * System.out.println("User_score (total):" +
+			 * tag_answerers.getScore());
+			 */
 		}
 		String[] str = { wrongTags, "", "", "" };
 		tab.add(str);
