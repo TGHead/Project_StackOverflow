@@ -24,10 +24,16 @@ public class HttpRequest {
      * 			  des resultats que le site retourne
      * @throws IOException 
      */
-    public static String sendGet(String url, String param) throws IOException {
+    public static String sendGet(String url, String param, boolean x) throws IOException {
     	StringBuffer response = new StringBuffer(); 
         try {
             String urlNameString = url + "?" + param;
+            if(x){
+        		urlNameString = url + "?" + param;
+        	}
+        	else{
+        		urlNameString = url + param;
+        	}
             URL realUrl = new URL(urlNameString);
             //Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("cache.univ-st-etienne.fr", 3128));
             //URLConnection connection = realUrl.openConnection(proxy);
