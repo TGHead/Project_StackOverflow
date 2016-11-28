@@ -22,7 +22,7 @@ public class fonction_Dave {
 		String wrongTags = "";
 
 		String json_str_tags = HttpRequest.sendGet(Requete_Generateur.Fonction_Tags(),
-				Requete_Generateur.GET_Parameters(1, 20));
+				Requete_Generateur.GET_Parameters(1, 20), true);
 
 		HashMap<String, Object> JSON_Map_tags = JSON_Converter.jsonToMap(json_str_tags);
 
@@ -72,7 +72,7 @@ public class fonction_Dave {
 
 			String json_str_tags_answerers = HttpRequest.sendGet(
 					Requete_Generateur.Fonction_Tags_TopAnswerers(1, sujet),
-					Requete_Generateur.GET_Parameters("1", nombre));
+					Requete_Generateur.GET_Parameters("1", nombre), true);
 
 			HashMap<String, Object> JSON_Map_tags_answerers = JSON_Converter.jsonToMap(json_str_tags_answerers);
 			ArrayList<TagsAnswerers> TagsAnswerers_List = TagsAnswerers
