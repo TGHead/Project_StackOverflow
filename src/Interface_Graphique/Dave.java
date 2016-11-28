@@ -6,7 +6,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -93,7 +95,11 @@ public class Dave {
 			list.clear();
 			for (int i = 0; i < temp.length; i++) {
 				if (!temp[i].isEmpty())
-					list.add(temp[i]);
+					try {
+						list.add(URLEncoder.encode(temp[i], "UTF-8"));
+					} catch (UnsupportedEncodingException e1) {
+						e1.printStackTrace();
+					}
 			}
 
 			String choix = Integer.toString(box.getSelectedIndex());
@@ -126,8 +132,10 @@ public class Dave {
 			result.setEditable(false);
 			frame.getContentPane().add(panel);
 			frame.setSize(251, (int) (screenSize.getHeight() - 100));
+			if (tab.get(tab.size() - 1) == tab.get(0))
+				frame.pack();
+
 			frame.setVisible(true);
-			System.out.println("###");
 		}
 	}
 
