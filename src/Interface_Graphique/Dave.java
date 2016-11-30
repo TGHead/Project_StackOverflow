@@ -77,6 +77,7 @@ public class Dave {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+		text.requestFocus();
 		result.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
 
 	}
@@ -102,6 +103,7 @@ public class Dave {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int n = boxFonctions.getSelectedIndex();
+			String s = "";
 			switch (n) {
 			case 0:
 				result.setText("");
@@ -129,7 +131,6 @@ public class Dave {
 					e1.printStackTrace();
 				}
 
-				String s = "";
 				if (tab.get(tab.size() - 1)[0] != "") {
 					s = "<b style=\"color:#FF0000\">Le(s) tag(s) " + tab.get(tab.size() - 1)[0]
 							+ " n'existe(nt) pas</b><br>";
@@ -155,45 +156,85 @@ public class Dave {
 				frame.setVisible(true);
 				break;
 			case 1:
-				ArrayList<String[]> tab = new ArrayList<String[]>();
-				try {
-					tab = f2.Alice1(text.getText());
-					res = true;
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				int cas = box.getSelectedIndex();
+				switch (cas) {
+				case 0:
 
-				String string = "";
-
-				if (tab.isEmpty()) {
-					res = false;
-					string = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + text.getText()
-							+ " n'existe pas</b><br>";
-				} else {
-
-					for (int i = 0; i < tab.get(0).length; i++) {
-						string = string + "<a href=\"" + tab.get(1)[i] + "\">" + tab.get(0)[i] + "</a><br>Tags :"
-								+ tab.get(2)[i] + "<br><br>";
-
+					ArrayList<String[]> tab = new ArrayList<String[]>();
+					try {
+						tab = f2.Alice1(text.getText());
+						res = true;
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-				}
-				result.setText(string);
-				frame.getContentPane().remove(panel);
-				jsp.setViewportView(result);
-				panel.add(jsp);
-				result.setCaretPosition(0);
-				result.setEditable(false);
-				frame.getContentPane().add(panel);
-				if (res)
-					frame.setSize(373, (int) (screenSize.getHeight() - 100));
-				else
-					frame.pack();
 
-				frame.setVisible(true);
+					if (tab.isEmpty()) {
+						res = false;
+						s = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + text.getText()
+								+ " n'existe pas</b><br>";
+					} else {
+
+						for (int i = 0; i < tab.get(0).length; i++) {
+							s = s + "<a href=\"" + tab.get(1)[i] + "\">" + tab.get(0)[i] + "</a><br>Tags :"
+									+ tab.get(2)[i] + "<br><br>";
+
+						}
+					}
+					result.setText(s);
+					frame.getContentPane().remove(panel);
+					jsp.setViewportView(result);
+					panel.add(jsp);
+					result.setCaretPosition(0);
+					result.setEditable(false);
+					frame.getContentPane().add(panel);
+					if (res)
+						frame.setSize(373, (int) (screenSize.getHeight() - 100));
+					else
+						frame.pack();
+
+					frame.setVisible(true);
+
+					break;
+
+				case 1:
+					s = "Pas encore implémenté";
+					result.setText(s);
+					frame.getContentPane().remove(panel);
+					jsp.setViewportView(result);
+					panel.add(jsp);
+					result.setCaretPosition(0);
+					result.setEditable(false);
+					frame.getContentPane().add(panel);
+					if (res)
+						frame.setSize(373, (int) (screenSize.getHeight() - 100));
+					else
+						frame.pack();
+
+					break;
+				case 2:
+
+					s = "Pas encore implémenté";
+					result.setText(s);
+					frame.getContentPane().remove(panel);
+					jsp.setViewportView(result);
+					panel.add(jsp);
+					result.setCaretPosition(0);
+					result.setEditable(false);
+					frame.getContentPane().add(panel);
+					if (res)
+						frame.setSize(373, (int) (screenSize.getHeight() - 100));
+					else
+						frame.pack();
+					break;
+
+				default:
+					break;
+				}
+
 				break;
 
 			default:
