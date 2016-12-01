@@ -37,10 +37,11 @@ public class fonction_Alice {
 		tag3 = URLEncoder.encode(tag3, "UTF-8");
 		req = "page=1&pagesize=7&order=desc&sort=activity&tagged=" + tag1 + "&site=stackoverflow";
 		String questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);
-		// System.out.println(questions);
+		System.out.println(questions);
 		String titres[] = new String[20];// Je stoque les titre là
 		String liens[] = new String[20];// Je stoque les liens là
 		String tags[] = new String[20];// Je stoque les tags là
+		String nb_quest[] = new String[30];//Pour eviter les doublons
 		for (int i = 0; i < 7; i++) {
 			titres[i] = Qtitle(questions, i + 1);
 			// System.out.println("question: ");
@@ -50,32 +51,52 @@ public class fonction_Alice {
 			tags[i] = Qtags(questions, i + 1);
 			// System.out.println("tags: ");
 			// System.out.println(tags[i]);
+			nb_quest[i] = Qnum(questions, i + 1);
+			// System.out.println("numero : ");
+			// System.out.println(nb_quest[i]);
 		}
-		req = "page=1&pagesize=7&order=desc&sort=activity&tagged=" + tag2 + "&site=stackoverflow";
+		int sup = 0;
+		req = "page=1&pagesize=10&order=desc&sort=activity&tagged=" + tag2 + "&site=stackoverflow";
 		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);
 		// System.out.println(questions);
-		for (int i = 0; i < 7; i++) {
-			titres[i + 7] = Qtitle(questions, i + 1);
-			// System.out.println("question: ");
-			// System.out.println(titres[i + 7]);
-			liens[i + 7] = Qlink(questions, i + 1);
-			// System.out.println(liens[i + 7]);
-			tags[i + 7] = Qtags(questions, i + 1);
-			// System.out.println("tags: ");
-			// System.out.println(tags[i + 7]);
+		for (int i = 0; i < 7 + sup; i++) {
+			if(doublon(Qnum(questions, i + 1), nb_quest)){
+				sup++;
+			}
+			else{
+				titres[i + 7] = Qtitle(questions, i + 1);
+				// System.out.println("question: ");
+				// System.out.println(titres[i + 7]);
+				liens[i + 7] = Qlink(questions, i + 1);
+				// System.out.println(liens[i + 7]);
+				tags[i + 7] = Qtags(questions, i + 1);
+				// System.out.println("tags: ");
+				// System.out.println(tags[i + 7]);
+				nb_quest[i + 7] = Qnum(questions, i + 1);
+				// System.out.println("numero : ");
+				// System.out.println(nb_quest[i]);
+			}
 		}
 		req = "page=1&pagesize=7&order=desc&sort=activity&tagged=" + tag3 + "&site=stackoverflow";
 		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);
 		// System.out.println(questions);
 		for (int i = 0; i < 6; i++) {
-			titres[i + 14] = Qtitle(questions, i + 1);
-			// System.out.println("question: ");
-			// System.out.println(titres[i + 14]);
-			liens[i + 14] = Qlink(questions, i + 1);
-			// System.out.println(liens[i + 14]);
-			tags[i + 14] = Qtags(questions, i + 1);
-			// System.out.println("tags: ");
-			// System.out.println(tags[i + 14]);
+			if(doublon(Qnum(questions, i + 1), nb_quest)){
+				sup++;
+			}
+			else{
+				titres[i + 14] = Qtitle(questions, i + 1);
+				// System.out.println("question: ");
+				// System.out.println(titres[i + 14]);
+				liens[i + 14] = Qlink(questions, i + 1);
+				// System.out.println(liens[i + 14]);
+				tags[i + 14] = Qtags(questions, i + 1);
+				// System.out.println("tags: ");
+				// System.out.println(tags[i + 14]);
+				nb_quest[i + 14] = Qnum(questions, i + 1);
+				// System.out.println("numero : ");
+				// System.out.println(nb_quest[i]);
+			}
 		}
 		tab.clear();
 		tab.add(titres);
@@ -117,4 +138,26 @@ public class fonction_Alice {
 		String res = q.substring(debut + 8, fin - 1);
 		return res;
 	}
+	public static String Qnum(String q, int num) {
+		int debut = 0;
+		int fin = 0;
+		for (int i = 0; i < num; i++) {
+			debut = q.indexOf("question_id", fin);
+			fin = q.indexOf(",", debut);
+		}
+		String res = q.substring(debut + 13, fin);
+		return res;
+	}
+	public static boolean doublon(String nq, String[] qprec){
+		for(int i = 0; i< qprec.length; i++){
+			if(qprec[i]==nq){
+				return true;
+			}
+		}
+		return false;
+	}
+	/*public static void main(String[] args) throws IOException, JSONException{
+		fonction_Alice x = new fonction_Alice();
+		x.Alice1("12345");
+	}*/
 }
