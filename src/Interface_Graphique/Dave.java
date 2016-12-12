@@ -33,53 +33,89 @@ public class Dave {
 	fonction_Dave f = new fonction_Dave();
 	fonction_Alice f2 = new fonction_Alice();
 	JFrame frame = new JFrame("Dave");
-	JLabel label = new JLabel("Entrez le(s) sujet(s) à rechercher");
-	JPanel panel = new JPanel();
+	JLabel labelDave = new JLabel("Entrez le(s) sujet(s) à rechercher");
+	JLabel labelAlice = new JLabel("Entrez votre numéro d'identifiant");
+	JPanel panelDave = new JPanel();
+	JPanel panelAlice = new JPanel();
+	int numeroFonction = 0;
+	int largeurDave, largeurAlice;
 	JScrollPane jsp = new JScrollPane();
-	JButton button = new JButton("OK");
-	JTextField text = new JTextField(20);
-	String listeDave[] = { "Trier par score obtenu", "Trier par nombre de post" };
-	String listeAlice[] = { "Chercher des nouvelles questions", "Chercher les utilisateurs ayant plus de badges",
-			"Trier les questions auxquelles j'ai répondu" };
-	String listeFonctions[] = { "Fonctionnalités de Dave", "Fonctionnalités d'Alice" };
-	JComboBox<String> box = new JComboBox<String>(listeDave);
-	JComboBox<String> boxFonctions = new JComboBox<String>(listeFonctions);
-	JEditorPane result = new JEditorPane();
+	JButton buttonDave1 = new JButton("Trier par score obtenu");
+	JButton buttonDave2 = new JButton("Trier par nombre de post");
+	JButton buttonAlice1 = new JButton("Chercher des nouvelles questions");
+	JButton buttonAlice2 = new JButton("Chercher les utilisateurs ayant plus de badges");
+	JButton buttonAlice3 = new JButton("Trier les questions auxquelles j'ai répondu");
+	JTextField textDave = new JTextField(20);
+	JTextField textAlice = new JTextField(20);
+	String listeFonctions[] = { "Dave", "Alice" };
+	JComboBox<String> boxFonctionsDave = new JComboBox<String>(listeFonctions);
+	JComboBox<String> boxFonctionsAlice = new JComboBox<String>(listeFonctions);
+	JEditorPane resultAlice = new JEditorPane();
+	JEditorPane resultDave = new JEditorPane();
 	boolean res = false;
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayList<String[]> tab = new ArrayList<String[]>();
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 	public Dave() throws IOException, JSONException {
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
+		panelAlice.setLayout(new BoxLayout(panelAlice, BoxLayout.PAGE_AXIS));
+		JPanel panel5 = new JPanel();
+		JPanel panel6 = new JPanel();
+		JPanel panel7 = new JPanel();
+		JPanel panel8 = new JPanel();
+		JPanel panel9 = new JPanel();
+		panel5.add(boxFonctionsAlice);
+		panel6.add(textAlice);
+		panel7.add(buttonAlice1);
+		panel8.add(buttonAlice2);
+		panel9.add(buttonAlice3);
+		panelAlice.add(panel5);
+		panelAlice.add(panel6);
+		panelAlice.add(panel7);
+		panelAlice.add(panel8);
+		panelAlice.add(panel9);
+		frame.getContentPane().add(panelAlice);
+		frame.pack();
+		largeurAlice = frame.getWidth();
+
+		frame.getContentPane().remove(panelAlice);
+		panelDave.setLayout(new BoxLayout(panelDave, BoxLayout.PAGE_AXIS));
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
 		JPanel panel3 = new JPanel();
 		JPanel panel4 = new JPanel();
-		panel4.add(boxFonctions);
-		panel1.add(text);
-		panel2.add(box);
-		panel2.add(button);
-		panel3.add(label);
-		panel.add(panel4);
-		panel.add(panel3);
-		panel.add(panel1);
-		panel.add(panel2);
+		panel4.add(boxFonctionsDave);
+		panel1.add(textDave);
+		panel2.add(buttonDave1);
+		panel3.add(buttonDave2);
+		panelDave.add(panel4);
+		panelDave.add(panel1);
+		panelDave.add(panel2);
+		panelDave.add(panel3);
+		frame.getContentPane().add(panelDave);
+		frame.pack();
+		largeurDave = frame.getWidth();
 
 		Ecouteur listen = new Ecouteur();
 		EcouteurFonctions lis = new EcouteurFonctions();
 		EcouteurURL listener = new EcouteurURL();
-		result.addHyperlinkListener(listener);
-		boxFonctions.addActionListener(lis);
-		button.addActionListener(listen);
-		frame.getContentPane().add(panel);
+		resultAlice.addHyperlinkListener(listener);
+		resultDave.addHyperlinkListener(listener);
+		boxFonctionsAlice.addActionListener(lis);
+		boxFonctionsDave.addActionListener(lis);
+		buttonDave1.addActionListener(listen);
+		buttonDave2.addActionListener(listen);
+		buttonAlice1.addActionListener(listen);
+		buttonAlice2.addActionListener(listen);
+		buttonAlice3.addActionListener(listen);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
-		text.requestFocus();
-		result.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
 
+		frame.setVisible(true);
+		textDave.requestFocus();
+		textAlice.requestFocus();
+		resultDave.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
+		resultAlice.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
 	}
 
 	public class EcouteurURL implements HyperlinkListener {
@@ -102,12 +138,23 @@ public class Dave {
 	public class Ecouteur implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int n = boxFonctions.getSelectedIndex();
+			int n = 0;
+			switch (numeroFonction) {
+			case 0:
+				n = boxFonctionsDave.getSelectedIndex();
+				break;
+			case 1:
+				n = boxFonctionsAlice.getSelectedIndex();
+				break;
+
+			default:
+				break;
+			}
 			String s = "";
 			switch (n) {
 			case 0:
-				result.setText("");
-				String recherche = text.getText();
+				resultDave.setText("");
+				String recherche = textDave.getText();
 				String[] temp = recherche.split("[,\\ \\;]");
 				list.clear();
 				for (int i = 0; i < temp.length; i++) {
@@ -118,8 +165,11 @@ public class Dave {
 							e1.printStackTrace();
 						}
 				}
-
-				String choix = Integer.toString(box.getSelectedIndex());
+				String choix;
+				if (e.getSource() == buttonDave1)
+					choix = "1";
+				else
+					choix = "2";
 				tab.clear();
 				try {
 					tab = f.resultat(list, "20", choix);
@@ -141,14 +191,13 @@ public class Dave {
 							+ tab.get(i)[2] + "<br>Score obtenu : " + tab.get(i)[3] + "<br><br>";
 				}
 
-				result.setText(s);
-				frame.getContentPane().remove(panel);
-				jsp.setViewportView(result);
-				panel.add(jsp);
-				result.setCaretPosition(0);
-				result.setEditable(false);
-				frame.getContentPane().add(panel);
-				frame.setSize(251, (int) (screenSize.getHeight() - 100));
+				resultDave.setText(s);
+				jsp.setViewportView(resultDave);
+				panelDave.add(jsp);
+				resultDave.setCaretPosition(0);
+				resultDave.setEditable(false);
+				frame.getContentPane().add(panelDave);
+				frame.setSize(largeurDave, (int) (screenSize.getHeight() - 100));
 				if (tab.get(tab.size() - 1) == tab.get(0)) {
 					res = false;
 					frame.pack();
@@ -156,13 +205,19 @@ public class Dave {
 				frame.setVisible(true);
 				break;
 			case 1:
-				int cas = box.getSelectedIndex();
+				int cas;
+				if (e.getSource() == buttonAlice1)
+					cas = 0;
+				else if (e.getSource() == buttonAlice2)
+					cas = 1;
+				else
+					cas = 2;
 				switch (cas) {
 				case 0:
 
 					ArrayList<String[]> tab = new ArrayList<String[]>();
 					try {
-						tab = f2.Alice1(text.getText());
+						tab = f2.Alice1(textAlice.getText());
 						res = true;
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
@@ -174,7 +229,7 @@ public class Dave {
 
 					if (tab.isEmpty()) {
 						res = false;
-						s = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + text.getText()
+						s = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + textAlice.getText()
 								+ " n'existe pas</b><br>";
 					} else {
 
@@ -184,15 +239,14 @@ public class Dave {
 
 						}
 					}
-					result.setText(s);
-					frame.getContentPane().remove(panel);
-					jsp.setViewportView(result);
-					panel.add(jsp);
-					result.setCaretPosition(0);
-					result.setEditable(false);
-					frame.getContentPane().add(panel);
+					resultAlice.setText(s);
+					jsp.setViewportView(resultAlice);
+					panelAlice.add(jsp);
+					resultAlice.setCaretPosition(0);
+					resultAlice.setEditable(false);
+					frame.getContentPane().add(panelAlice);
 					if (res)
-						frame.setSize(373, (int) (screenSize.getHeight() - 100));
+						frame.setSize(largeurAlice, (int) (screenSize.getHeight() - 100));
 					else
 						frame.pack();
 
@@ -202,15 +256,14 @@ public class Dave {
 
 				case 1:
 					s = "Pas encore implémenté";
-					result.setText(s);
-					frame.getContentPane().remove(panel);
-					jsp.setViewportView(result);
-					panel.add(jsp);
-					result.setCaretPosition(0);
-					result.setEditable(false);
-					frame.getContentPane().add(panel);
+					resultAlice.setText(s);
+					jsp.setViewportView(resultAlice);
+					panelAlice.add(jsp);
+					resultAlice.setCaretPosition(0);
+					resultAlice.setEditable(false);
+					frame.getContentPane().add(panelAlice);
 					if (res)
-						frame.setSize(373, (int) (screenSize.getHeight() - 100));
+						frame.setSize(largeurAlice, (int) (screenSize.getHeight() - 100));
 					else
 						frame.pack();
 
@@ -218,15 +271,15 @@ public class Dave {
 				case 2:
 
 					s = "Pas encore implémenté";
-					result.setText(s);
-					frame.getContentPane().remove(panel);
-					jsp.setViewportView(result);
-					panel.add(jsp);
-					result.setCaretPosition(0);
-					result.setEditable(false);
-					frame.getContentPane().add(panel);
+					resultAlice.setText(s);
+
+					jsp.setViewportView(resultAlice);
+					panelAlice.add(jsp);
+					resultAlice.setCaretPosition(0);
+					resultAlice.setEditable(false);
+					frame.getContentPane().add(panelAlice);
 					if (res)
-						frame.setSize(373, (int) (screenSize.getHeight() - 100));
+						frame.setSize(largeurAlice, (int) (screenSize.getHeight() - 100));
 					else
 						frame.pack();
 					break;
@@ -246,30 +299,63 @@ public class Dave {
 	public class EcouteurFonctions implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int n = boxFonctions.getSelectedIndex();
+			res = false;
+			switch (numeroFonction) {
+			case 0:
+				frame.getContentPane().remove(panelDave);
+				break;
+			case 1:
+				frame.getContentPane().remove(panelAlice);
+				break;
+			case 2:
+				// frame.getContentPane().remove(panelBob);
+				break;
+			case 3:
+				// frame.getContentPane().remove(panelCharlie);
+				break;
+			default:
+				break;
+			}
+			textDave.setText("");
+			textAlice.setText("");
+			int n = 0;
+			switch (numeroFonction) {
+			case 0:
+				n = boxFonctionsDave.getSelectedIndex();
+				resultDave.setText("");
+				break;
+			case 1:
+				n = boxFonctionsAlice.getSelectedIndex();
+				resultAlice.setText("");
+				break;
+
+			default:
+				break;
+			}
 			switch (n) {
 			case 0:
 				frame.setTitle("Dave");
-				label.setText("Entrez le(s) sujet(s) à rechercher");
-				box.setModel(new JComboBox(listeDave).getModel());
+				frame.getContentPane().add(panelDave);
+				boxFonctionsDave.setSelectedIndex(0);
 				if (res)
-					frame.setSize(251, (int) (screenSize.getHeight() - 100));
+					frame.setSize(largeurDave, (int) (screenSize.getHeight() - 100));
 				else
 					frame.pack();
 				break;
 			case 1:
 				frame.setTitle("Alice");
-				label.setText("Entrez votre numéro d'identifiant");
-				box.setModel(new JComboBox(listeAlice).getModel());
+				boxFonctionsAlice.setSelectedIndex(1);
+				frame.getContentPane().add(panelAlice);
 				if (res)
-					frame.setSize(373, (int) (screenSize.getHeight() - 100));
+					frame.setSize(largeurAlice, (int) (screenSize.getHeight() - 100));
 				else
 					frame.pack();
 				break;
 			default:
 				break;
-			}
 
+			}
+			numeroFonction = n;
 		}
 	}
 
