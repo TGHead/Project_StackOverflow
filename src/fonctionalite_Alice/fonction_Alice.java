@@ -37,11 +37,11 @@ public class fonction_Alice {
 		tag3 = URLEncoder.encode(tag3, "UTF-8");
 		req = "page=1&pagesize=7&order=desc&sort=activity&tagged=" + tag1 + "&site=stackoverflow";
 		String questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);
-		System.out.println(questions);
+		// System.out.println(questions);
 		String titres[] = new String[20];// Je stoque les titre là
 		String liens[] = new String[20];// Je stoque les liens là
 		String tags[] = new String[20];// Je stoque les tags là
-		String nb_quest[] = new String[30];//Pour eviter les doublons
+		String nb_quest[] = new String[30];// Pour eviter les doublons
 		for (int i = 0; i < 7; i++) {
 			titres[i] = Qtitle(questions, i + 1);
 			// System.out.println("question: ");
@@ -60,10 +60,9 @@ public class fonction_Alice {
 		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);
 		// System.out.println(questions);
 		for (int i = 0; i < 7 + sup; i++) {
-			if(doublon(Qnum(questions, i + 1), nb_quest)){
+			if (doublon(Qnum(questions, i + 1), nb_quest)) {
 				sup++;
-			}
-			else{
+			} else {
 				titres[i + 7] = Qtitle(questions, i + 1);
 				// System.out.println("question: ");
 				// System.out.println(titres[i + 7]);
@@ -81,10 +80,9 @@ public class fonction_Alice {
 		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);
 		// System.out.println(questions);
 		for (int i = 0; i < 6; i++) {
-			if(doublon(Qnum(questions, i + 1), nb_quest)){
+			if (doublon(Qnum(questions, i + 1), nb_quest)) {
 				sup++;
-			}
-			else{
+			} else {
 				titres[i + 14] = Qtitle(questions, i + 1);
 				// System.out.println("question: ");
 				// System.out.println(titres[i + 14]);
@@ -138,6 +136,7 @@ public class fonction_Alice {
 		String res = q.substring(debut + 8, fin - 1);
 		return res;
 	}
+
 	public static String Qnum(String q, int num) {
 		int debut = 0;
 		int fin = 0;
@@ -148,16 +147,17 @@ public class fonction_Alice {
 		String res = q.substring(debut + 13, fin);
 		return res;
 	}
-	public static boolean doublon(String nq, String[] qprec){
-		for(int i = 0; i< qprec.length; i++){
-			if(qprec[i]==nq){
+
+	public static boolean doublon(String nq, String[] qprec) {
+		for (int i = 0; i < qprec.length; i++) {
+			if (qprec[i] == nq) {
 				return true;
 			}
 		}
 		return false;
 	}
-	/*public static void main(String[] args) throws IOException, JSONException{
-		fonction_Alice x = new fonction_Alice();
-		x.Alice1("12345");
-	}*/
+	/*
+	 * public static void main(String[] args) throws IOException, JSONException{
+	 * fonction_Alice x = new fonction_Alice(); x.Alice1("12345"); }
+	 */
 }
