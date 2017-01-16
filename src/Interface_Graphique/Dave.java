@@ -450,10 +450,33 @@ public class Dave {
 					frame.setVisible(true);
 					break;
 				case 2:
+					ArrayList<String[]> tab3 = new ArrayList<String[]>();
 
-					s = "Pas encore implémenté";
+					try {
+						tab3 = f3.Bob3(textBob.getText());
+						res = true;
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					if (tab3.isEmpty()) {
+						res = false;
+						s = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + textAlice.getText()
+								+ " n'existe pas</b><br>";
+					} else {
+
+						for (int i = 0; i < tab3.get(0).length; i++) {
+							s = s + "<a href=\"" + tab3.get(1)[i] + "\">" + tab3.get(0)[i] + "</a><br>Tags :"
+									+ tab3.get(2)[i] + "<br><br>";
+
+						}
+					}
+
 					resultBob.setText(s);
-
 					jsp.setViewportView(resultBob);
 					panelBob.add(jsp);
 					resultBob.setCaretPosition(0);
