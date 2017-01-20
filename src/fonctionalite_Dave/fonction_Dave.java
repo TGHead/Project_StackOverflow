@@ -40,7 +40,7 @@ public class fonction_Dave {
 
 		ArrayList<Tag> Tags_List_New = Operation_BDD.Select_Table_Tags(Conn_BDD);
 
-		System.out.println(Tags_List_New);
+		// System.out.println(Tags_List_New);
 
 		// Operation_BDD.Derby_DisConnexion(Conn_BDD);
 		/*
