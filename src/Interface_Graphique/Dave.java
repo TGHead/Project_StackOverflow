@@ -33,15 +33,15 @@ public class Dave {
 	fonction_Dave f = new fonction_Dave();
 	fonction_Alice f2 = new fonction_Alice();
 	JFrame frame = new JFrame("Dave");
-	JLabel label = new JLabel("Entrez le(s) sujet(s) à rechercher");
+	JLabel label = new JLabel("Entrez le(s) sujet(s) ï¿½ rechercher");
 	JPanel panel = new JPanel();
 	JScrollPane jsp = new JScrollPane();
 	JButton button = new JButton("OK");
 	JTextField text = new JTextField(20);
 	String listeDave[] = { "Trier par score obtenu", "Trier par nombre de post" };
 	String listeAlice[] = { "Chercher des nouvelles questions", "Chercher les utilisateurs ayant plus de badges",
-			"Trier les questions auxquelles j'ai répondu" };
-	String listeFonctions[] = { "Fonctionnalités de Dave", "Fonctionnalités d'Alice" };
+			"Trier les questions auxquelles j'ai ré–œondu" };
+	String listeFonctions[] = { "Fonctionnalité–Ÿ de Dave", "Fonctionnalité–Ÿ d'Alice" };
 	JComboBox<String> box = new JComboBox<String>(listeDave);
 	JComboBox<String> boxFonctions = new JComboBox<String>(listeFonctions);
 	JEditorPane result = new JEditorPane();
@@ -171,7 +171,7 @@ public class Dave {
 
 				if (tab.isEmpty()) {
 					res = false;
-					string = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + text.getText()
+					string = "<b style=\"color:#FF0000\">Le numé–žo d'identifiant " + text.getText()
 							+ " n'existe pas</b><br>";
 				} else {
 
@@ -209,7 +209,7 @@ public class Dave {
 			switch (n) {
 			case 0:
 				frame.setTitle("Dave");
-				label.setText("Entrez le(s) sujet(s) à rechercher");
+				label.setText("Entrez le(s) sujet(s) ï¿½ rechercher");
 				box.setModel(new JComboBox(listeDave).getModel());
 				if (res)
 					frame.setSize(251, (int) (screenSize.getHeight() - 100));
@@ -218,7 +218,7 @@ public class Dave {
 				break;
 			case 1:
 				frame.setTitle("Alice");
-				label.setText("Entrez votre numéro d'identifiant");
+				label.setText("Entrez votre numé–žo d'identifiant");
 				box.setModel(new JComboBox(listeAlice).getModel());
 				if (res)
 					frame.setSize(373, (int) (screenSize.getHeight() - 100));
@@ -234,6 +234,5 @@ public class Dave {
 
 	public static void main(String[] args) throws IOException, JSONException {
 		new Dave();
-
 	}
 }
