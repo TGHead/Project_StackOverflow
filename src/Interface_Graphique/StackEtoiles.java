@@ -51,13 +51,16 @@ public class StackEtoiles {
 			int n = boxFonctions.getSelectedIndex();
 			switch (n) {
 			case 0:
+				dave.text.setText("");
 				panel.add(dave.panel);
 				break;
 			case 1:
 				panel.add(alice.panel);
+				alice.text.setText("");
 				break;
 			case 2:
 				panel.add(bob.panel);
+				bob.text.setText("");
 				break;
 			default:
 				break;

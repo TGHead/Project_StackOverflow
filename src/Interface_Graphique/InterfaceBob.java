@@ -3,6 +3,8 @@ package Interface_Graphique;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -72,9 +74,37 @@ public class InterfaceBob {
 			fonctionBob f = new fonctionBob();
 			switch (cas) {
 			case 0:
+				String str = text.getText();
+				try {
+					str = URLEncoder.encode(str, "UTF-8");
+				} catch (UnsupportedEncodingException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				try {
+					tab = f.Bob1(str);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
-				err = true;
-				s = "Pas encore implémenté";
+				if (tab.get(0)[0] == null) {
+					err = true;
+					s = "<b style=\"color:#FF0000\">Aucune question trouvée</b><br>";
+				} else if (text.getText().isEmpty()) {
+					err = true;
+					s = "<b style=\"color:#FF0000\">Aucun mots clés rentré</b><br>";
+				} else {
+					for (int i = 0; i < tab.get(0).length; i++) {
+						s = s + "<a href=\"" + tab.get(1)[i] + "\">" + tab.get(0)[i] + "</a><br>Tags :" + tab.get(2)[i]
+								+ "<br><br>";
+
+					}
+				}
+
 				result.setText(s);
 				StackEtoiles.jsp.setViewportView(result);
 				result.setCaretPosition(0);
