@@ -128,7 +128,6 @@ public class InterfaceBob {
 
 				break;
 			case 2:
-				System.out.println("#");
 				try {
 					tab = f.Bob3(text.getText());
 				} catch (IOException e1) {
