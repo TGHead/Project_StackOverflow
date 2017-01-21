@@ -19,7 +19,6 @@ public class fonctionBob {
 		ArrayList<String[]> tab = new ArrayList<String[]>();
 		String requete = "?order=desc&sort=relevance&title=" + mots + "&site=stackoverflow";
 		String resultat = HttpRequest.sendGet("https://api.stackexchange.com/2.2/similar", requete, false);
-		System.out.println(resultat);
 		JSONObject json = new JSONObject(resultat);
 		JSONArray arr = json.getJSONArray("items");
 
