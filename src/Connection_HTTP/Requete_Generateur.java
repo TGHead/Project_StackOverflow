@@ -20,11 +20,19 @@ public class Requete_Generateur {
 	}
 	
 	public static String Fonction_Users() {
-		return "https://api.stackexchange.com/2.2/users";
+		return "https://api.stackexchange.com/2.2/users/";
 	}
 	
 	public static String Fonction_Users_TopTags(String user_id) {
-		return Fonction_Users() + user_id + "/top-tags";
+		return user_id + "/top-tags";
+	}
+	
+	public static String Fonction_Users_Answers(String user_id) {
+		return user_id + "/answers";
+	}
+	
+	public static String Fonction_Answers_Questions(int ans_id) {
+		return "https://api.stackexchange.com/2.2/answers/" + ans_id + "/questions";
 	}
 	
 	public static String GET_Parameters(String page,String pagesize) {

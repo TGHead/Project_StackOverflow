@@ -8,15 +8,65 @@ import java.util.HashMap;
 import org.json.JSONException;
 
 import Connection_HTTP.HttpRequest;
+import Connection_HTTP.Requete_Generateur;
+import Data_Structure.Answer;
 import Data_Structure.JSON_Converter;
+import Data_Structure.Question;
+import Data_Structure.Tag;
+import Data_Structure.User;
 
 public class fonction_Alice {
+	
+	public static ArrayList<String []> Alice3 (String id) throws IOException, JSONException{
+		ArrayList<String []> tab = new ArrayList<String []>();
+		
+		
+		String json_str_answers = HttpRequest.sendGet(Requete_Generateur.Fonction_Users() + Requete_Generateur.Fonction_Users_Answers(id)
+														, "page=1&pagesize=10&order=desc&sort=votes&site=stackoverflow", true);//demande les tops tags ï¿½ stack overflow
+		HashMap<String, Object> JSON_Map_answers = JSON_Converter.jsonToMap(json_str_answers);
+		ArrayList<Answer> Answers_List = Answer.JSON_ListtoAnswer_List((ArrayList) JSON_Map_answers.get("items"));
+		ArrayList<Question> Question_List = new ArrayList<Question>();
+		for(Answer ans : Answers_List) {
+			String json_str_questions = HttpRequest.sendGet(Requete_Generateur.Fonction_Answers_Questions(ans.getAnswer_id()), Requete_Generateur.GET_Parameters(1, 1), true);
+			HashMap<String,Object> JSON_Map_questions = JSON_Converter.jsonToMap(json_str_questions);
+			JSON_Map_questions = (HashMap<String, Object>) ((ArrayList)JSON_Map_questions.get("items")).get(0);
+			JSON_Map_questions.put("owner", User.MaptoC_User((HashMap<String,Object>)JSON_Map_questions.get("owner")));
+			Question_List.add(Question.MaptoC_Question(JSON_Map_questions));
+		}
+		for(int i=0; i<Question_List.size() - 1;i++) {
+			//Question qmax = Question_List.get(i);
+			//int max = i;
+			for(int j=i+1; j<Question_List.size();j++) {
+				if(Question_List.get(i).getScore() < Question_List.get(j).getScore()) {
+					Question qt = new Question(Question_List.get(i));
+					Question_List.set(i,Question_List.get(j));
+					Question_List.set(j, qt);
+				}
+			}
+		}
+		String title[] = new String[Question_List.size()];
+		String link[] = new String[Question_List.size()];
+		String score[] = new String[Question_List.size()];
+		//String ans_id[] = new String[Question_List.size()];
+		int i = 0;
+		for(Question q : Question_List){
+			title[i] = q.getTitle();
+			link[i] = q.getLink();
+			score[i++] = q.getScore() + "";
+		}
+		tab.clear();
+		tab.add(title);
+		tab.add(link);
+		tab.add(score);
+		return tab;
+	}
+	
 	public static ArrayList<String[]> Alice1(String id) throws IOException, JSONException {
 		ArrayList<String[]> tab = new ArrayList<String[]>();
 		String req;//La suite du programme vise a obtenir les tops tags de l'utilisateur
 		req = id + "/top-tags?page=1&pagesize=3&site=stackoverflow";//id = identifiant de l'utilisateur
-		String json_str_top_tags = HttpRequest.sendGet("https://api.stackexchange.com/2.2/users/", req, false);//demande les tops tags à stack overflow
-		HashMap<String, Object> JSON_Map_tags = JSON_Converter.jsonToMap(json_str_top_tags);//les 3 lignes suivantes transforme la reponse de stack overflow en string plus facile à utiliser
+		String json_str_top_tags = HttpRequest.sendGet("https://api.stackexchange.com/2.2/users/", req, false);//demande les tops tags ï¿½ stack overflow
+		HashMap<String, Object> JSON_Map_tags = JSON_Converter.jsonToMap(json_str_top_tags);//les 3 lignes suivantes transforme la reponse de stack overflow en string plus facile ï¿½ utiliser
 		Object it = JSON_Map_tags.get("items");
 		String temp = it.toString();
 
@@ -38,20 +88,20 @@ public class fonction_Alice {
 		req = "page=1&pagesize=7&order=desc&sort=activity&tagged=" + tag1 + "&site=stackoverflow";
 		String questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);//requete des 7 dernieres questions sans reponses ayant le tag 1
 		// System.out.println(questions);
-		String titres[] = new String[20];// Je stoque les titre là
-		String liens[] = new String[20];// Je stoque les liens là
-		String tags[] = new String[20];// Je stoque les tags là
+		String titres[] = new String[20];// Je stoque les titre lï¿½
+		String liens[] = new String[20];// Je stoque les liens lï¿½
+		String tags[] = new String[20];// Je stoque les tags lï¿½
 		String nb_quest[] = new String[30];// Pour eviter les doublons
 		for (int i = 0; i < 7; i++) {
-			titres[i] = Qtitle(questions, i + 1);//on stoque les libellés des questions là
+			titres[i] = Qtitle(questions, i + 1);//on stoque les libellé–Ÿ des questions lï¿½
 			// System.out.println("question: ");
 			// System.out.println(titres[i]);
-			liens[i] = Qlink(questions, i + 1);//on stoque les liens vers les questions là
+			liens[i] = Qlink(questions, i + 1);//on stoque les liens vers les questions lï¿½
 			// System.out.println(liens[i]);
-			tags[i] = Qtags(questions, i + 1);// on stoque les tags des questions là
+			tags[i] = Qtags(questions, i + 1);// on stoque les tags des questions lï¿½
 			// System.out.println("tags: ");
 			// System.out.println(tags[i]);
-			nb_quest[i] = Qnum(questions, i + 1);// on stoque les numeros des questions là
+			nb_quest[i] = Qnum(questions, i + 1);// on stoque les numeros des questions lï¿½
 			// System.out.println("numero : ");
 			// System.out.println(nb_quest[i]);
 		}
@@ -60,7 +110,7 @@ public class fonction_Alice {
 		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions/unanswered", req, true);//7 dernieres questions sans reponse avec tag 2
 		// System.out.println(questions);
 		for (int i = 0; i < 7 + sup; i++) {
-			if (doublon(Qnum(questions, i + 1), nb_quest)) {//permet d'éviter les doublons (question ayant deux des tags)
+			if (doublon(Qnum(questions, i + 1), nb_quest)) {//permet d'é–¢iter les doublons (question ayant deux des tags)
 				sup++;
 			} else {
 				titres[i + 7] = Qtitle(questions, i + 1);
@@ -96,7 +146,7 @@ public class fonction_Alice {
 				// System.out.println(nb_quest[i]);
 			}
 		}
-		tab.clear();//on retourne les résultats
+		tab.clear();//on retourne les ré–Ÿultats
 		tab.add(titres);
 		tab.add(liens);
 		tab.add(tags);
@@ -104,7 +154,7 @@ public class fonction_Alice {
 
 	}
 
-	public static String Qtags(String q, int num) {//cette fonction cherche la numème liste de tags dans le string de retour de stack overflow q et la retourne
+	public static String Qtags(String q, int num) {//cette fonction cherche la numé‘e liste de tags dans le string de retour de stack overflow q et la retourne
 		int debut = 0;
 		int fin = 0;
 		for (int i = 0; i < num; i++) {
@@ -115,7 +165,7 @@ public class fonction_Alice {
 		return res;
 	}
 
-	public static String Qlink(String q, int num) {//cette fonction cherche le numème lien dans le string q  de retour de stack overflowet la retourne
+	public static String Qlink(String q, int num) {//cette fonction cherche le numé‘e lien dans le string q  de retour de stack overflowet la retourne
 		int debut = 0;
 		int fin = 0;
 		for (int i = 0; i < num; i++) {
@@ -126,7 +176,7 @@ public class fonction_Alice {
 		return res;
 	}
 
-	public static String Qtitle(String q, int num) {//cette fonction cherche le numème libellé de question dans le string q  de retour de stack overflowet la retourne
+	public static String Qtitle(String q, int num) {//cette fonction cherche le numé‘e libellï¿½ de question dans le string q  de retour de stack overflowet la retourne
 		int debut = 0;
 		int fin = 0;
 		for (int i = 0; i < num; i++) {
@@ -137,7 +187,7 @@ public class fonction_Alice {
 		return res;
 	}
 
-	public static String Qnum(String q, int num) {//cette fonction cherche le numème numero de question dans le string q  de retour de stack overflowet la retourne
+	public static String Qnum(String q, int num) {//cette fonction cherche le numé‘e numero de question dans le string q  de retour de stack overflowet la retourne
 		int debut = 0;
 		int fin = 0;
 		for (int i = 0; i < num; i++) {
@@ -148,7 +198,7 @@ public class fonction_Alice {
 		return res;
 	}
 
-	public static boolean doublon(String nq, String[] qprec) {//vérifie que le string nq (numero question) est absent du tableau de string qprec (questions precedentes).
+	public static boolean doublon(String nq, String[] qprec) {//vé–žifie que le string nq (numero question) est absent du tableau de string qprec (questions precedentes).
 		for (int i = 0; i < qprec.length; i++) {//retourne true s'il est present et false sinon
 			if (qprec[i] == nq) {
 				return true;

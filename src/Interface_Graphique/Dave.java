@@ -320,7 +320,35 @@ public class Dave {
 					break;
 				case 2:
 
-					s = "Pas encore impl�ment�";
+					
+					ArrayList<String[]> tab1 = new ArrayList<String[]>();
+					try {
+						tab1 = f2.Alice3(textAlice.getText());
+						res = true;
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					if (tab1.isEmpty()) {
+						res = false;
+						s = "<b style=\"color:#FF0000\">Le num�ro d'identifiant " + textAlice.getText()
+								+ " n'existe pas</b><br>";
+					} else {
+
+						for (int i = 0; i < tab1.get(0).length; i++) {
+							s = s + "<a href=\"" + tab1.get(1)[i] + "\">" + tab1.get(0)[i] + "</a><br>Score :"
+									+ tab1.get(2)[i] + "<br><br>";
+
+						}
+					}
+					
+					
+					
+					//s = "Pas encore impl�ment�";
 					resultAlice.setText(s);
 
 					jsp.setViewportView(resultAlice);
