@@ -15,7 +15,22 @@ import Data_Structure.Question;
 import Data_Structure.Tag;
 import Data_Structure.User;
 
+/**
+ * Ce class realiser des fontionnalite d'Alice
+ * @author L'Etoile-TSE
+ *
+ */
+
 public class fonction_Alice {
+	
+	/**
+	 * rappel par le class InterfaceAlice pour realiser la fonctionnalite d'Alice3
+	 * 
+	 * @param id l'identifiant d'utilisateur qu'on s'interesse
+	 * @return Une liste de unsemble des string pour UI
+	 * @throws IOException
+	 * @throws JSONException
+	 */
 	
 	public static ArrayList<String []> Alice3 (String id) throws IOException, JSONException{
 		ArrayList<String []> tab = new ArrayList<String []>();

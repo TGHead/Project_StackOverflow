@@ -20,7 +20,7 @@ import fonctionalite_Dave.fonction_Dave;
 
 public class InterfaceDave {
 	JPanel panel = new JPanel();
-	JLabel label = new JLabel("Entrez le(s) sujet(s) à rechercher");
+	JLabel label = new JLabel("Entrez le(s) sujet(s) ï¿½ rechercher");
 	JButton button1 = new JButton("Trier par score obtenu");
 	JButton button2 = new JButton("Trier par nombre de post");
 	JTextField text = new JTextField(20);
@@ -79,7 +79,7 @@ public class InterfaceDave {
 			else
 				choix = "1";
 			try {
-				tab = f.resultat(list, "20", choix);
+				tab = f.Dave(list, "20", choix);
 			} catch (IOException e1) {
 
 				e1.printStackTrace();

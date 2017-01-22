@@ -2,22 +2,50 @@ package Data_Structure;
 
 import java.util.HashMap;
 
+/**
+* Un class pour decrire un objet d'utilisateur sur la site Stackoverflow qui presente une user sur la site.
+* @author L'Etoile-TSE
+*/
+
 public class User {
+	/**
+	 * un entier qui indique la reputation d'utilisateur
+	 * 
+	 */
 	long reputation;
+	/**
+	 * un eniter indique l'identifiant d'utilisateur
+	 */
 	long user_id;
+	/**
+	 * un string indique le type d'utilisateur
+	 */
 	String user_type;
+	/**
+	 * un float indique le taux d'success d'utilisateur
+	 */
 	float accept_rate;
+	/**
+	 * un lien URL indique l'image de profil d'utilisateur
+	 */
 	String profile_image;
+	/**
+	 * un String indique le pseudo d'utilisateur
+	 */
 	String display_name;
+	/**
+	 * un lien correspond la page personnel d'utilisateur
+	 */
 	String link;
 	/**
-	 * @param reputation
-	 * @param user_id
-	 * @param user_type
-	 * @param accept_rate
-	 * @param profile_image
-	 * @param display_name
-	 * @param link
+	 * un constructeur pardefaut
+	 * @param reputation reputation
+	 * @param user_id user_id
+	 * @param user_type user_type
+	 * @param accept_rate accept_rate
+	 * @param profile_image profile_image
+	 * @param display_name display_name
+	 * @param link link
 	 */
 	public User(long reputation, long user_id, String user_type, float accept_rate, String profile_image,
 			String display_name, String link) {
@@ -123,6 +151,13 @@ public class User {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	
+	/**
+	 * la methode permet de transformer un map de json_donnee au objet user
+	 * @param user un HashMap qu'on obtient par le convertisseur de json qui enregistre des information d'utilisateur
+	 * @return un objet user a correspond.
+	 */
+	
 	public static User MaptoC_User(HashMap<String,Object> user) {
 		return new User(user.containsKey("reputation")?Long.valueOf((Integer)user.get("reputation")):-1, 
 				user.containsKey("user_id")?Long.valueOf((Integer)user.get("user_id")):-1, 
@@ -132,9 +167,5 @@ public class User {
 				user.containsKey("display_name")?(String)user.get("display_name"):"UNKNOWN", 
 				user.containsKey("link")?(String)user.get("link"):"UNKNOWN");
 	}
-	/*
-	public static HashMap<String,Object> C_UsertoMap(User u) {
-		HashMap<String, Object> map = {"reputation" : u.getReputation(), "user_id" : u.getUser_id(), "user_type" : u.getUser_type(), "accept_rate" : u.getAccept_rate(), "profile_image" : u.getProfile_image(), "display_name" : u.getDisplay_name()};
-	}
-	*/
+	
 }

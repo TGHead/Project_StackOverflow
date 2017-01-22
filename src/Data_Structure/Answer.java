@@ -4,19 +4,40 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+* Un class pour decrire un objet de answer sur la site Stackoverflow qui presente une reponse ecrit par un utilisateur.
+* @author L'Etoile-TSE
+*/
+
 public class Answer {
+	/**
+	* Un objet User indique cette reponse appartient de quel utilisateur.
+	*/
 	User owner;
+	/**
+	* Un boolean indique l'etat d'accepte.
+	*/
 	boolean is_accepted;
+	/**
+	* Un entier indique le score que cette reponse obtient .
+	*/
 	long score;
+	/**
+	* Un entier indique l'identifiant de reponse .
+	*/
 	int answer_id;
+	/**
+	* Un entier indique l'identifiant de question a correspond .
+	*/
 	int question_id;
 	
 	/**
-	 * @param owner
-	 * @param is_accepted
-	 * @param score
-	 * @param answer_id
-	 * @param question_id
+	 * Constructuer de class Answer par defaut.
+	 * @param owner owner
+	 * @param is_accepted is_accepted
+	 * @param score score
+	 * @param answer_id answer_id
+	 * @param question_id question_id
 	 */
 	public Answer(User owner, boolean is_accepted, long score, int answer_id, int question_id) {
 		super();
@@ -97,6 +118,12 @@ public class Answer {
 		this.question_id = question_id;
 	}
 	
+	/**
+	 * la methode permet de transformer un map de json_donnee au objet answer
+	 * @param answer un HashMap qu'on obtient par le convertisseur de json qui enregistre des information
+	 * @return un objet answer a correspond.
+	 */
+	
 	public static Answer MaptoC_Answer(HashMap<String,Object> answer) {
 		return new Answer(answer.containsKey("owner")?(User)answer.get("owner"):null, 
 				answer.containsKey("is_accepted")?(boolean)answer.get("is_accepted"):false, 
@@ -104,6 +131,12 @@ public class Answer {
 				answer.containsKey("answer_id")?(int)answer.get("answer_id"):-1, 
 				answer.containsKey("question_id")?(int)answer.get("question_id"):-1);
 	}
+	
+	/**
+	 * la methode permet de transformer un map de json donnee obtenu par la requette de HTTP au une liste des objets answer
+	 * @param json_list un HashMap qu'on obtient par la requette de HTTP
+	 * @return une liste des objets answers
+	 */
 	
 	public static ArrayList<Answer> JSON_ListtoAnswer_List(ArrayList<HashMap<String, Object>> json_list) {
 		ArrayList<Answer> answer_list = new ArrayList<Answer>();

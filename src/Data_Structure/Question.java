@@ -4,28 +4,61 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+* Un class pour decrire un objet de question sur la site Stackoverflow qui presente une question ecrit par un utilisateur.
+* @author L'Etoile-TSE
+*/
+
 public class Question {
+	/**
+	 * Une ensemble des tags correspond a la question
+	 */
 	String[] tags;
+	/**
+	* Un objet User indique cette question appartient de quel utilisateur.
+	*/
 	User owner;
+	/**
+	 * Un boolean indique l'etat de reponser.
+	 */
 	boolean is_answered;
+	/**
+	 * Un entier indique le nombre de vue.
+	 */
 	long view_count;
+	/**
+	 * Un entier indique le nombre de reponse.
+	 */
 	int answer_count;
+	/**
+	 * Un entier indique le score que cette reponse obtient.
+	 */
 	long score;
+	/**
+	 * Un entier indique l'identifiant de question.
+	 */
 	int question_id;
+	/**
+	 * Un String de URL correspond la question.
+	 */
 	String link;
+	/**
+	 * Un string de title corresponde cette question
+	 */
 	String title;
 	
 	
 	/**
-	 * @param tags
-	 * @param owner
-	 * @param is_answered
-	 * @param view_count
-	 * @param answer_count
-	 * @param score
-	 * @param question_id
-	 * @param link
-	 * @param title
+	 * Un constructeur par defaut
+	 * @param tags tags
+	 * @param owner owner 
+	 * @param is_answered is_answered
+	 * @param view_count view_count
+	 * @param answer_count answer_count
+	 * @param score score
+	 * @param question_id question_id
+	 * @param link link
+	 * @param title title
 	 */
 	public Question(String[] tags, User owner, boolean is_answered, long view_count, int answer_count, long score,
 			int question_id, String link, String title) {
@@ -40,6 +73,11 @@ public class Question {
 		this.link = link;
 		this.title = title;
 	}
+	
+	/**
+	 * Un constructeur en initialiser par un autre objet
+	 * @param q un objet de question
+	 */
 	
 	public Question(Question q) {
 		// TODO Auto-generated constructor stub
@@ -173,6 +211,12 @@ public class Question {
 		this.title = title;
 	}
 	
+	/**
+	 * la methode permet de transformer un map de json_donnee au objet question
+	 * @param question un HashMap qu'on obtient par le convertisseur de json qui enregistre des information
+	 * @return un objet question a correspond.
+	 */
+	
 	public static Question MaptoC_Question(HashMap<String,Object> question) {
 		return new Question(question.containsKey("tags")?(String [])((ArrayList)question.get("tags")).toArray(new String[((ArrayList)question.get("tags")).size()]):null, 
 				question.containsKey("owner")?(User)question.get("owner"):null, 
@@ -184,6 +228,12 @@ public class Question {
 				question.containsKey("link")?(String)question.get("link"):"UNKNOWN",
 				question.containsKey("title")?(String)question.get("title"):"UNKNOWN");
 	}
+	
+	/**
+	 * la methode permet de transformer un map de json donnee obtenu par la requette de HTTP au une liste des objets question
+	 * @param json_list un HashMap qu'on obtient par la requette de HTTP
+	 * @return une liste des objets questions
+	 */
 	
 	public static ArrayList<Question> JSON_ListtoQuestion_List(ArrayList<HashMap<String, Object>> json_list) {
 		ArrayList<Question> question_list = new ArrayList<Question>();

@@ -14,9 +14,27 @@ import Data_Structure.JSON_Converter;
 import Data_Structure.Tag;
 import Data_Structure.TagsAnswerers;
 
-public class fonction_Dave {
+/**
+ * Ce class realiser des fontionnalite de Dave
+ * @author L'Etoile-TSE
+ *
+ */
 
-	public static ArrayList<String[]> resultat(ArrayList<String> sujet_list, String nombre, String choix)
+public class fonction_Dave {
+	
+	/**
+	 * rappel par UI pour resliser des fonctionnalites de Dave
+	 * 
+	 * @param sujet_list tag saisir par UI
+	 * @param nombre le nombre d'utilisateur en chercher
+	 * @param choix le choix indique l'ordre de resultat
+	 * @see Select_Table_PluralTagsAnswerers
+	 * @return Une liste de unsemble des string pour UI
+	 * @throws IOException
+	 * @throws JSONException
+	 */
+
+	public static ArrayList<String[]> Dave(ArrayList<String> sujet_list, String nombre, String choix)
 			throws IOException, JSONException {
 
 		String wrongTags = "";

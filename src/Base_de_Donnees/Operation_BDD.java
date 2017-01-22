@@ -12,8 +12,21 @@ import Data_Structure.Tag;
 import Data_Structure.TagsAnswerers;
 import Data_Structure.User;
 
+
+/**
+* Un class pour controler d'acceder un base de donnees afin de faire ajouter rechercher ou modifier des donnees 
+* qu'on recuperer par le API du site StackOverflow <br/>
+* Ce class est cree dans la permiere periode de developement, il est utilise pour la fonctionnalite Dave. <br/>
+* BDD utilise : {@link org.apache.derby Derby 10.13.1.1}
+* @author L'Etoile-TSE
+*/
 public class Operation_BDD {
 
+	/**
+	* Connecter la BDD nomme BDD_StackOverflow<br/>
+	* Si elle n'existe pas on permet de creer un nouvelle BDD sous le dossier du projet<br/>
+	* @return un structure de Connection
+	*/
 	public static Connection Derby_Connexion() {
 		String driver = "org.apache.derby.jdbc.EmbeddedDriver";
 		String URL = "jdbc:derby:BDD_StackOverflow;create=true;upgrade=true";
@@ -32,6 +45,10 @@ public class Operation_BDD {
 		}
 	}
 
+	/**
+	* Deconnecter la BDD <br/>
+	* @param laConnexion l'interface de Connection pour fermer
+	*/
 	public static void Derby_DisConnexion(Connection laConnexion) {
 		try {
 			laConnexion.close();
@@ -39,7 +56,17 @@ public class Operation_BDD {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	* Creer une table "PROJET_STACKEXCHANGE.tags" dans la BDD avec des atributs: <br/>
+	* <li>tag_name VARCHAR(20) PRIMARY KEY</li>
+	* <li>nombre INT</li>
+	* <li>has_synonyms BOOLEAN</li>
+	* <li>is_moderator_only BOOLEAN</li>
+	* <li>is_required BOOLEAN</li>
+	* <br/>
+	* @param laConnexion l'interface de Connection pour manipuler
+	*/
 	public static void Create_Table_Tags(Connection laConnexion) {
 		if (laConnexion == null) {
 			System.out.println("Creer la table_tags echoue!");
@@ -67,6 +94,19 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Creer une table "PROJET_STACKEXCHANGE.users" dans la BDD avec des atributs: <br/>
+	* <li>user_id INT PRIMARY KEY</li>
+	* <li>reputation INT</li>
+	* <li>user_type VARCHAR(20)</li>
+	* <li>accept_rate FLOAT</li>
+	* <li>profile_image VARCHAR(256)</li>
+	* <li>display_name VARCHAR(128)</li>
+	* <li>link VARCHAR(256)</li>
+	* <br/>
+	* @param laConnexion l'interface de Connection pour manipuler
+	*/
 
 	public static void Create_Table_Users(Connection laConnexion) {
 		if (laConnexion == null) {
@@ -96,6 +136,19 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Creer une table "PROJET_STACKEXCHANGE.tags_answerers" dans la BDD avec des atributs: <br/>
+	* <li>user_id INT NOT NULL</li>
+	* <li>user_name VARCHAR(128)</li>
+	* <li>tag_name VARCHAR(20) NOT NULL</li>
+	* <li>post_count INT</li>
+	* <li>score INT</li>
+	* <br/>
+	* avec la PRIMARY KEY (user_id, tag_name)
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	*/
 
 	public static void Create_Tables_TagsAnswerers(Connection laConnexion) {
 		if (laConnexion == null) {
@@ -126,6 +179,14 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Inserer des tags dans la table "PROJET_STACKEXCHANGE.tags" dans la BDD <br/>
+	* 
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* @param tag un objet de {@linkplain Tag Tag}.
+	*/
 
 	public static void Insert_Into_Table_Tags(Connection laConnexion, Tag tag) {
 		if (laConnexion == null) {
@@ -161,6 +222,14 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Inserer des users dans la table "PROJET_STACKEXCHANGE.users" dans la BDD <br/>
+	* 
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* @param user un objet de {@linkplain User User}.
+	*/
 
 	public static void Insert_Into_Table_Users(Connection laConnexion, User user) {
 		if (laConnexion == null) {
@@ -198,6 +267,14 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Inserer des users dans la table "PROJET_STACKEXCHANGE.TagAnswerers" dans la BDD <br/>
+	* 
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* @param tag_answerers un objet de {@linkplain TagsAnswerers TagsAnswerers}.
+	*/
 
 	public static void Insert_Into_Table_TagsAnswerers(Connection laConnexion, TagsAnswerers tag_answerers) {
 		if (laConnexion == null) {
@@ -231,6 +308,14 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Supprimer la table nomme "PROJET_STACKEXCHANGE.Tags" dans la BDD <br/>
+	* 
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* 
+	*/
 
 	public static void Delete_Table_Tags(Connection laConnexion) {
 		if (laConnexion == null) {
@@ -255,6 +340,14 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Supprimer la table nomme "PROJET_STACKEXCHANGE.Users" dans la BDD <br/>
+	* 
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* 
+	*/
 
 	public static void Delete_Table_Users(Connection laConnexion) {
 		if (laConnexion == null) {
@@ -279,6 +372,14 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Supprimer la table nomme "PROJET_STACKEXCHANGE.tags_answerers" dans la BDD <br/>
+	* 
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* 
+	*/
 
 	public static void Delete_Table_TagsAnswerers(Connection laConnexion) {
 		if (laConnexion == null) {
@@ -303,6 +404,14 @@ public class Operation_BDD {
 			}
 		}
 	}
+	
+	/**
+	* Rechercher des enregistements dans la table "PROJET_STACKEXCHANGE.tags" de la BDD <br/>
+	* Et renvoyer des resultat par une liste
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* @return Un ArrayList qui charger des Tag objets  
+	*/
 
 	public static ArrayList<Tag> Select_Table_Tags(Connection laConnexion) {
 		if (laConnexion == null) {
@@ -325,6 +434,14 @@ public class Operation_BDD {
 			return list_tag;
 		}
 	}
+	
+	/**
+	* Rechercher des enregistements dans la table "PROJET_STACKEXCHANGE.users" de la BDD <br/>
+	* Et renvoyer des resultat par une liste
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* @return Un ArrayList qui charger des User objets  
+	*/
 
 	public static ArrayList<User> Select_Table_Users(Connection laConnexion) {
 		if (laConnexion == null) {
@@ -349,6 +466,17 @@ public class Operation_BDD {
 		}
 	}
 
+	/**
+	* Rechercher des enregistements dans la table "PROJET_STACKEXCHANGE.tags_answerers" de la BDD <br/>
+	* Et renvoyer des resultat par une liste<br/>
+	* !!!!!!!!!!!!!!!!!!!!!!!!!Elle n'utilise plus et remplace par la methode Select_Table_PluralTagsAnswerers!!!!!!!!!!!!!!!!!!!!!!!!!<br/>
+	* Car le resultat de select ne correspond pas ce qu'on a besoins.
+	* @param laConnexion l'interface de Connection pour manipuler
+	* @param para un parametre indique l'ordre de resultat par rapport au score ou le nombre de post
+	* @return Un ArrayList qui charger des TagsAnswerers objets 
+	* @see  Select_Table_PluralTagsAnswerers
+	*/
+	
 	public static ArrayList<TagsAnswerers> Select_Table_TagsAnswerers(Connection laConnexion, String para) {
 		if (laConnexion == null) {
 			System.out.println("Select via la table_Tags echoue!");
@@ -389,6 +517,15 @@ public class Operation_BDD {
 			return list_tag_answerers;
 		}
 	}
+	
+	/**
+	* Rechercher des enregistements dans la table "PROJET_STACKEXCHANGE.tags_answerers" de la BDD <br/>
+	* Et renvoyer des resultat par une liste<br/>
+	* 
+	* @param laConnexion l'interface de Connection pour manipuler
+	* @param para un parametre indique l'ordre de resultat par rapport au score ou le nombre de post
+	* @return Un ArrayList qui charger des TagsAnswerers objets  
+	*/
 
 	public static ArrayList<TagsAnswerers> Select_Table_PluralTagsAnswerers(Connection laConnexion, String para) {
 		if (laConnexion == null) {

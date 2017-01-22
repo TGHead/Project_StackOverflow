@@ -10,15 +10,22 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
 
+/**
+* Un class pour envoyer des requetes au web serveur de Stackoverflow  <br/>
+* Par la methode HTTP : GET 
+* @author L'Etoile-TSE
+*/
+
 public class HttpRequest {
 	/**
-	 * Envoyer un request GET a un certain URL
+	 * Envoyer un request GET a un certain URL et decompresser des resultats.
 	 * 
 	 * @param url
 	 *            une partie de URL pour appel le API
 	 * @param param
 	 *            des parametres details sous le format:
 	 *            name1=value1&name2=value2
+	 * @param x indique s'il y a besoin d'ajouter un point d'interrogation
 	 * @return des resultats que le site retourne
 	 * @throws IOException
 	 */
