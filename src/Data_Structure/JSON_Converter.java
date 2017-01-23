@@ -9,15 +9,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
- * Un class pour convertiser un json string au HashMap. 
+ * Une class pour convertir un json string en HashMap. 
  * @author L'Etoile-TSE
  *
  */
 public class JSON_Converter {
 	/**
-	 * la methode essentiel pour convertiser.
-	 * @param jsonString unstring en format de json
-	 * @return HashMap correspond des donnees json
+	 * la methode essentielle pour convertir.
+	 * @param jsonString un string au format de json
+	 * @return HashMap correspond a des donnees json
 	 * @throws JSONException
 	 */
 	public static HashMap<String, Object> jsonToMap(String jsonString) throws JSONException {
@@ -32,9 +32,9 @@ public class JSON_Converter {
 	}
 	
 	/**
-	 * Utiliser un objet intermediaire pour constuire le HashMap
+	 * Utilise un objet intermediaire pour constuire le HashMap
 	 * @param object un objet de JSONObject intermediaire
-	 * @return le HashMap correspond des donnee json
+	 * @return le HashMap correspondant aux donnees json
 	 * @throws JSONException
 	 */
 
@@ -59,9 +59,9 @@ public class JSON_Converter {
 	}
 	
 	/**
-	 * Utiliser un objet intermediaire pour constuire la liste
+	 * Utilise un objet intermediaire pour construire la liste
 	 * @param array un objet de JSONArray intermediaire
-	 * @return la liste correspond des donnee json
+	 * @return la liste correspondant aux donnees json
 	 * @throws JSONException
 	 */
 
@@ -82,9 +82,9 @@ public class JSON_Converter {
 	}
 	
 	/**
-	 * Convertiser Un Map de json donnees au une liste d'user.
+	 * convertir une Map de json donnees en une liste d'user.
 	 * @param JSON_Map le json donnee 
-	 * @returnune liste d'user
+	 * @return la liste d'user
 	 */
 	
 	public static List<User> User_fromJMap(Map<String, Object> JSON_Map){

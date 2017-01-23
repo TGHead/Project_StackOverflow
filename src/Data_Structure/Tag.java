@@ -6,29 +6,29 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* Un class pour decrire un objet de tag sur la site Stackoverflow qui presente une tag sur la site.
+* Une class pour decrire un objet tag sur le site Stackoverflow
 * @author L'Etoile-TSE
 */
 
 public class Tag {
 	/**
-	 * Un boolean indique l'etat si d'avoir des synonyms.
+	 * Un boolean indiquant si le tag a des synonymes
 	 */
 	boolean has_synonyms;
 	/**
-	 * Un boolean indique l'etat de moderator_only.
+	 * Un boolean indiquant l'etat de moderator_only.
 	 */
 	boolean is_moderator_only;
 	/**
-	 * Un boolean indique l'etat is_required.
+	 * Un boolean indiquant l'etat is_required.
 	 */
 	boolean is_required;
 	/**
-	 * Un entier indique le nombre de count.
+	 * Un entier indiquant le nombre count.
 	 */
 	long count;
 	/**
-	 * Un string indique le nom de tag
+	 * Un string indiquant le nom du tag
 	 */
 	String name;
 	/**
@@ -48,61 +48,61 @@ public class Tag {
 		this.name = name;
 	}
 	/**
-	 * @return the has_synonyms
+	 * @return has_synonyms
 	 */
 	public boolean isHas_synonyms() {
 		return has_synonyms;
 	}
 	/**
-	 * @return the is_moderator_only
+	 * @return is_moderator_only
 	 */
 	public boolean isIs_moderator_only() {
 		return is_moderator_only;
 	}
 	/**
-	 * @return the is_required
+	 * @return is_required
 	 */
 	public boolean isIs_required() {
 		return is_required;
 	}
 	/**
-	 * @return the count
+	 * @return count
 	 */
 	public long getCount() {
 		return count;
 	}
 	/**
-	 * @return the name
+	 * @return name
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
-	 * @param has_synonyms the has_synonyms to set
+	 * @param has_synonyms le has_synonyms qui va etre set
 	 */
 	public void setHas_synonyms(boolean has_synonyms) {
 		this.has_synonyms = has_synonyms;
 	}
 	/**
-	 * @param is_moderator_only the is_moderator_only to set
+	 * @param is_moderator_only le is_moderator_only qui va etre set
 	 */
 	public void setIs_moderator_only(boolean is_moderator_only) {
 		this.is_moderator_only = is_moderator_only;
 	}
 	/**
-	 * @param is_required the is_required to set
+	 * @param is_required le is_required qui va etre set
 	 */
 	public void setIs_required(boolean is_required) {
 		this.is_required = is_required;
 	}
 	/**
-	 * @param count the count to set
+	 * @param count le count qui va etre set
 	 */
 	public void setCount(long count) {
 		this.count = count;
 	}
 	/**
-	 * @param name the name to set
+	 * @param name le name qui va etre set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -117,9 +117,9 @@ public class Tag {
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json_donnee au objet tag
-	 * @param tag un HashMap qu'on obtient par le convertisseur de json qui enregistre des information
-	 * @return un objet tag a correspond.
+	 * cette methode permet de transformer un map de json_donnee en objet tag
+	 * @param tag un HashMap qu'on obtient grace au convertisseur de json qui enregistre les informations
+	 * @return un objet tag qui correspond.
 	 */
 	
 	public static Tag MaptoC_Tag(HashMap<String,Object> tag) {
@@ -131,9 +131,9 @@ public class Tag {
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json donnee obtenu par la requette de HTTP au une liste des objets tag
-	 * @param json_list un HashMap qu'on obtient par la requette de HTTP
-	 * @return une liste des objets tags
+	 * cette methode permet de transformer un map de json donnee obtenu avec la requette HTTP en une liste d'objets tag
+	 * @param json_list un HashMap qu'on obtient avec la requette HTTP
+	 * @return une liste d'objets tags
 	 */
 	
 	public static ArrayList<Tag> JSON_ListtoTag_List(ArrayList<HashMap<String, Object>> json_list) {

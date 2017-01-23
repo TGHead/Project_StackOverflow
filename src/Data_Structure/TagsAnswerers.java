@@ -4,35 +4,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Un class qui presente la relation des tags et des utilisateurs 
+ * Une class qui presente la relation entre tags et utilisateurs 
  * @author Administrator
  *
  */
 
 public class TagsAnswerers {
 	/**
-	 * un objet d'user corrspond
+	 * un objet user correspondant
 	 */
 	User user;
 	/**
-	 * un string correspond le nom de tag
+	 * un string correspondant au nom du tag
 	 */
 	String tag_name;
 	/**
-	 * un entier correspond le nombre des post par l'user sur ce tag
+	 * un entier correspondant au nombre de posts par l'user pour ce tag
 	 */
 	int post_count;
 	/**
-	 * un entier correspond le score obtenu par l'user sur ce tag
+	 * un entier correspondant au score obtenu par l'user pour ce tag
 	 */
 	int score;
 	/**
-	 * unconstructeur par defaut
-	 * @param user_id
-	 * @param user_name
-	 * @param tag_name
-	 * @param post_count
-	 * @param score
+	 * un constructeur par defaut
+	 * @param user_id l'ID de l'user correspondant
+	 * @param user_name le nom de l'user correspondant
+	 * @param tag_name un string correspondant au nom du tag
+	 * @param post_count un entier correspondant au nombre de posts par l'user pour ce tag
+	 * @param score un entier correspondant au score obtenu par l'user pour ce tag
 	 */
 	public TagsAnswerers(User user, String tag_name, int post_count, int score) {
 		super();
@@ -79,7 +79,7 @@ public class TagsAnswerers {
 
 
 	/**
-	 * @param user the user to set
+	 * @param user le user qui doit etre set
 	 */
 	public void setUser(User user) {
 		this.user = user;
@@ -88,7 +88,7 @@ public class TagsAnswerers {
 
 
 	/**
-	 * @param tag_name the tag_name to set
+	 * @param tag_name le tag_name qui doit etre set
 	 */
 	public void setTag_name(String tag_name) {
 		this.tag_name = tag_name;
@@ -97,7 +97,7 @@ public class TagsAnswerers {
 
 
 	/**
-	 * @param post_count the post_count to set
+	 * @param post_count le post_count qui doit etre set
 	 */
 	public void setPost_count(int post_count) {
 		this.post_count = post_count;
@@ -106,7 +106,7 @@ public class TagsAnswerers {
 
 
 	/**
-	 * @param score the score to set
+	 * @param score le score qui doit etre set
 	 */
 	public void setScore(int score) {
 		this.score = score;
@@ -122,9 +122,9 @@ public class TagsAnswerers {
 	}
 
 	/**
-	 * la methode permet de transformer un map de json_donnee au objet tagsanswerers par rechercher sur la BDD
-	 * @param tag_answerer un HashMap qu'on obtient par le convertisseur de json qui enregistre des information
-	 * @return un objet tagsanswerers a correspond.
+	 * cette methode permet de transformer un map de json_donne en objet tagsanswerers en recherchant sur la BDD
+	 * @param tag_answerer un HashMap qu'on obtient grace au convertisseur de json qui enregistre des informations
+	 * @return un objet tagsanswerers qui correspond.
 	 */
 	
 	public static TagsAnswerers MaptoC_TagsAnswerers(HashMap<String,Object> tag_answerer, String tag) {
@@ -135,8 +135,8 @@ public class TagsAnswerers {
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json donnee obtenu par la requette de BDD au une liste des objets tagsanswerers
-	 * @param json_list un HashMap qu'on obtient par la requette de BDD
+	 * cette methode permet de transformer un map de json donne obtenu avec la requete de BDD en une liste d'objets tagsanswerers
+	 * @param json_list un HashMap qu'on obtient avec la requete de BDD
 	 * @return une liste des objets tagsanswerers
 	 */
 	

@@ -117,31 +117,8 @@ public class InterfaceAlice {
 				StackEtoiles.frame.setVisible(true);
 				break;
 			case 1:
-
-				try {
-					tab = f.Alice2(text.getText());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				if (tab.isEmpty()) {
-					err = true;
-					s = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + text.getText()
-							+ " n'existe pas</b><br>";
-				} else {
-
-					s = s + "Nombre de badges : " + tab.get(0).length + "<br><br>";
-					for (int i = 0; i < tab.get(0).length; i++) {
-						s = s + "<a href=\"" + tab.get(1)[i] + "\">" + tab.get(0)[i] + "</a><br>Rang : " + tab.get(2)[i]
-								+ "<br><br>";
-
-					}
-				}
-
+				err = true;
+				s = "Pas encore implémenté";
 				result.setText(s);
 				StackEtoiles.jsp.setViewportView(result);
 				result.setCaretPosition(0);

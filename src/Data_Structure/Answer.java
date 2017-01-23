@@ -5,39 +5,39 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
-* Un class pour decrire un objet de answer sur la site Stackoverflow qui presente une reponse ecrit par un utilisateur.
+* Une class pour decrire un objet answer sur le site Stackoverflow qui represente une reponse ecrite par un utilisateur.
 * @author L'Etoile-TSE
 */
 
 public class Answer {
 	/**
-	* Un objet User indique cette reponse appartient de quel utilisateur.
+	* Un objet indiquant l'utilisateur a qui la reponse appartient.
 	*/
 	User owner;
 	/**
-	* Un boolean indique l'etat d'accepte.
+	* Un boolean indiquant l'etat d'acceptation.
 	*/
 	boolean is_accepted;
 	/**
-	* Un entier indique le score que cette reponse obtient .
+	* Un entier indiquant le score que cette reponse a obtenu .
 	*/
 	long score;
 	/**
-	* Un entier indique l'identifiant de reponse .
+	* Un entier indiquant l'identifiant de la reponse .
 	*/
 	int answer_id;
 	/**
-	* Un entier indique l'identifiant de question a correspond .
+	* Un entier indiquant l'identifiant de la question qui correspond .
 	*/
 	int question_id;
 	
 	/**
-	 * Constructuer de class Answer par defaut.
-	 * @param owner owner
-	 * @param is_accepted is_accepted
-	 * @param score score
-	 * @param answer_id answer_id
-	 * @param question_id question_id
+	 * Constructeur de la class Answer par defaut.
+	 * @param owner Un objet indiquant l'utilisateur a qui la reponse appartient.
+	 * @param is_accepted  Un boolean indiquant l'etat d'acceptation.
+	 * @param score Un entier indiquant le score que cette reponse a obtenu .
+	 * @param answer_id Un entier indiquant l'identifiant de la reponse .
+	 * @param question_id Un entier indiquant l'identifiant de la question qui correspond .
 	 */
 	public Answer(User owner, boolean is_accepted, long score, int answer_id, int question_id) {
 		super();
@@ -88,40 +88,40 @@ public class Answer {
 		return question_id;
 	}
 	/**
-	 * @param owner the owner to set
+	 * @param owner le owner qui doit etre set
 	 */
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 	/**
-	 * @param is_accepted the is_accepted to set
+	 * @param is_accepted le boolen qui doit etre set
 	 */
 	public void setIs_accepted(boolean is_accepted) {
 		this.is_accepted = is_accepted;
 	}
 	/**
-	 * @param score the score to set
+	 * @param score le score qui doit etre set
 	 */
 	public void setScore(long score) {
 		this.score = score;
 	}
 	/**
-	 * @param answer_id the answer_id to set
+	 * @param answer_id le answer_id qui doit etre set
 	 */
 	public void setAnswer_id(int answer_id) {
 		this.answer_id = answer_id;
 	}
 	/**
-	 * @param question_id the question_id to set
+	 * @param question_id le question_id qui doit etre set
 	 */
 	public void setQuestion_id(int question_id) {
 		this.question_id = question_id;
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json_donnee au objet answer
-	 * @param answer un HashMap qu'on obtient par le convertisseur de json qui enregistre des information
-	 * @return un objet answer a correspond.
+	 * cette methode permet de transformer un map de json_donnee en objet answer
+	 * @param answer un HashMap qu'on obtient par le convertisseur de json qui enregistre des informations
+	 * @return un objet answer qui correspond.
 	 */
 	
 	public static Answer MaptoC_Answer(HashMap<String,Object> answer) {
@@ -133,9 +133,9 @@ public class Answer {
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json donnee obtenu par la requette de HTTP au une liste des objets answer
-	 * @param json_list un HashMap qu'on obtient par la requette de HTTP
-	 * @return une liste des objets answers
+	 * cette methode permet de transformer un map de json donnee obtenu par requete de HTTP en une liste d'objets answer
+	 * @param json_list un HashMap qu'on obtient par requete de HTTP
+	 * @return une liste d'objets answers
 	 */
 	
 	public static ArrayList<Answer> JSON_ListtoAnswer_List(ArrayList<HashMap<String, Object>> json_list) {

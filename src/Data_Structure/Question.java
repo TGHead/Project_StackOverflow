@@ -5,60 +5,60 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
-* Un class pour decrire un objet de question sur la site Stackoverflow qui presente une question ecrit par un utilisateur.
+* Une classe pour decrire un objet correspondant a une question ecrite par un utilisateur sur le site Stackoverflow.
 * @author L'Etoile-TSE
 */
 
 public class Question {
 	/**
-	 * Une ensemble des tags correspond a la question
+	 * Un ensemble de tags correspondant a la question
 	 */
 	String[] tags;
 	/**
-	* Un objet User indique cette question appartient de quel utilisateur.
+	* Un objet User indiquant a quel utilisateur cette question appartient
 	*/
 	User owner;
 	/**
-	 * Un boolean indique l'etat de reponser.
+	 * Un boolean indiquant l'etat de la reponse.
 	 */
 	boolean is_answered;
 	/**
-	 * Un entier indique le nombre de vue.
+	 * Un entier indiquant le nombre de vues.
 	 */
 	long view_count;
 	/**
-	 * Un entier indique le nombre de reponse.
+	 * Un entier indiquant le nombre de reponses.
 	 */
 	int answer_count;
 	/**
-	 * Un entier indique le score que cette reponse obtient.
+	 * Un entier indiquant le score que cette reponse a obtenu.
 	 */
 	long score;
 	/**
-	 * Un entier indique l'identifiant de question.
+	 * Un entier indiquant l'identifiant de la question.
 	 */
 	int question_id;
 	/**
-	 * Un String de URL correspond la question.
+	 * Un String qui est l'URL correspondant a la question.
 	 */
 	String link;
 	/**
-	 * Un string de title corresponde cette question
+	 * Un String qui est le titre correspondant a la question.
 	 */
 	String title;
 	
 	
 	/**
 	 * Un constructeur par defaut
-	 * @param tags tags
-	 * @param owner owner 
-	 * @param is_answered is_answered
-	 * @param view_count view_count
-	 * @param answer_count answer_count
-	 * @param score score
-	 * @param question_id question_id
-	 * @param link link
-	 * @param title title
+	 * @param tags Un ensemble de tags correspondant a la question
+	 * @param owner Un objet User indiquant a quel utilisateur cette question appartient
+	 * @param is_answered Un boolean indiquant l'etat de la reponse.
+	 * @param view_count Un entier indiquant le nombre de vues.
+	 * @param answer_count Un entier indiquant le nombre de reponses.
+	 * @param score Un entier indiquant le score que cette reponse a obtenu.
+	 * @param question_id Un entier indiquant l'identifiant de la question.
+	 * @param link Un String qui est l'URL correspondant a la question.
+	 * @param title Un String qui est le titre correspondant a la question.
 	 */
 	public Question(String[] tags, User owner, boolean is_answered, long view_count, int answer_count, long score,
 			int question_id, String link, String title) {
@@ -75,8 +75,8 @@ public class Question {
 	}
 	
 	/**
-	 * Un constructeur en initialiser par un autre objet
-	 * @param q un objet de question
+	 * Un constructeur qui est initialise par un autre objet
+	 * @param q un objet Question
 	 */
 	
 	public Question(Question q) {
@@ -103,118 +103,118 @@ public class Question {
 	}
 
 	/**
-	 * @return the tags
+	 * @return Un ensemble de tags correspondant a la question
 	 */
 	public String[] getTags() {
 		return tags;
 	}
 	/**
-	 * @return the owner
+	 * @return Un objet User indiquant a quel utilisateur cette question appartient
 	 */
 	public User getOwner() {
 		return owner;
 	}
 	/**
-	 * @return the is_answered
+	 * @return Un boolean indiquant l'etat de la reponse.
 	 */
 	public boolean isIs_answered() {
 		return is_answered;
 	}
 	/**
-	 * @return the view_count
+	 * @return the Un entier indiquant le nombre de vues.
 	 */
 	public long getView_count() {
 		return view_count;
 	}
 	/**
-	 * @return the answer_count
+	 * @return Un entier indiquant le nombre de reponses.
 	 */
 	public int getAnswer_count() {
 		return answer_count;
 	}
 	/**
-	 * @return the score
+	 * @return Un entier indiquant le score que cette reponse a obtenu.
 	 */
 	public long getScore() {
 		return score;
 	}
 	/**
-	 * @return the question_id
+	 * @return Un entier indiquant l'identifiant de la question.
 	 */
 	public int getQuestion_id() {
 		return question_id;
 	}
 	/**
-	 * @return the link
+	 * @return the Un String qui est l'URL correspondant a la question.
 	 */
 	public String getLink() {
 		return link;
 	}
 	/**
-	 * @return the title
+	 * @return Un String qui est le titre correspondant a la question.
 	 */
 	public String getTitle() {
 		return title;
 	}
 	/**
-	 * @param tags the tags to set
+	 * @param tags les tags qui seront set
 	 */
 	public void setTags(String[] tags) {
 		this.tags = tags;
 	}
 	/**
-	 * @param owner the owner to set
+	 * @param owner le owner qui sera set
 	 */
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
 	/**
-	 * @param is_answered the is_answered to set
+	 * @param is_answered le is_answered qui sera set
 	 */
 	public void setIs_answered(boolean is_answered) {
 		this.is_answered = is_answered;
 	}
 	/**
-	 * @param view_count the view_count to set
+	 * @param view_count le view_count qui sera set
 	 */
 	public void setView_count(long view_count) {
 		this.view_count = view_count;
 	}
 	/**
-	 * @param answer_count the answer_count to set
+	 * @param answer_count le answer_count qui sera set
 	 */
 	public void setAnswer_count(int answer_count) {
 		this.answer_count = answer_count;
 	}
 	/**
-	 * @param score the score to set
+	 * @param score le score qui sera set
 	 */
 	public void setScore(long score) {
 		this.score = score;
 	}
 	/**
-	 * @param question_id the question_id to set
+	 * @param question_id le question_id qui sera set
 	 */
 	public void setQuestion_id(int question_id) {
 		this.question_id = question_id;
 	}
 	/**
-	 * @param link the link to set
+	 * @param link le link qui sera set
 	 */
 	public void setLink(String link) {
 		this.link = link;
 	}
 	/**
-	 * @param title the title to set
+	 * @param title le title qui sera set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json_donnee au objet question
-	 * @param question un HashMap qu'on obtient par le convertisseur de json qui enregistre des information
-	 * @return un objet question a correspond.
+	 * cette methode permet de transformer un map de json_donnee en objet question
+	 * @param question un HashMap qu'on obtient par le convertisseur de json qui enregistre des informations
+	 * @return l'objet question qui correspond.
 	 */
 	
 	public static Question MaptoC_Question(HashMap<String,Object> question) {
@@ -230,9 +230,9 @@ public class Question {
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json donnee obtenu par la requette de HTTP au une liste des objets question
-	 * @param json_list un HashMap qu'on obtient par la requette de HTTP
-	 * @return une liste des objets questions
+	 * la methode permet de transformer un map de json donnee obtenu par la requete de HTTP en une liste d'objet question
+	 * @param json_list un HashMap qu'on obtient par la requete HTTP
+	 * @return une liste d'objet question
 	 */
 	
 	public static ArrayList<Question> JSON_ListtoQuestion_List(ArrayList<HashMap<String, Object>> json_list) {

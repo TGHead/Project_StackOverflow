@@ -3,49 +3,49 @@ package Data_Structure;
 import java.util.HashMap;
 
 /**
-* Un class pour decrire un objet d'utilisateur sur la site Stackoverflow qui presente une user sur la site.
+* Un class pour decrire un objet d'utilisateur sur le site Stackoverflow.
 * @author L'Etoile-TSE
 */
 
 public class User {
 	/**
-	 * un entier qui indique la reputation d'utilisateur
+	 * un entier qui indique la reputation de l'utilisateur
 	 * 
 	 */
 	long reputation;
 	/**
-	 * un eniter indique l'identifiant d'utilisateur
+	 * un entier qui indique l'identifiant de l'utilisateur
 	 */
 	long user_id;
 	/**
-	 * un string indique le type d'utilisateur
+	 * un string qui indique le type d'utilisateur
 	 */
 	String user_type;
 	/**
-	 * un float indique le taux d'success d'utilisateur
+	 * un float qui indique le taux de succes de l'utilisateur
 	 */
 	float accept_rate;
 	/**
-	 * un lien URL indique l'image de profil d'utilisateur
+	 * un lien URL qui correspond a l'image de profil de l'utilisateur
 	 */
 	String profile_image;
 	/**
-	 * un String indique le pseudo d'utilisateur
+	 * un String qui indique le pseudo de l'utilisateur
 	 */
 	String display_name;
 	/**
-	 * un lien correspond la page personnel d'utilisateur
+	 * un lien qui correspond a la page personnelle de l'utilisateur
 	 */
 	String link;
 	/**
-	 * un constructeur pardefaut
-	 * @param reputation reputation
-	 * @param user_id user_id
-	 * @param user_type user_type
-	 * @param accept_rate accept_rate
-	 * @param profile_image profile_image
-	 * @param display_name display_name
-	 * @param link link
+	 * un constructeur par defaut
+	 * @param reputation un entier qui indique la reputation de l'utilisateur
+	 * @param user_id un entier qui indique l'identifiant de l'utilisateur
+	 * @param user_type un string qui indique le type d'utilisateur
+	 * @param accept_rate un float qui indique le taux de succes de l'utilisateur
+	 * @param profile_image un lien URL qui correspond a l'image de profil de l'utilisateur
+	 * @param display_name un String qui indique le pseudo de l'utilisateur
+	 * @param link un lien qui correspond a la page personnelle de l'utilisateur
 	 */
 	public User(long reputation, long user_id, String user_type, float accept_rate, String profile_image,
 			String display_name, String link) {
@@ -110,52 +110,52 @@ public class User {
 		return link;
 	}
 	/**
-	 * @param reputation the reputation to set
+	 * @param reputation la reputation qui va etre set
 	 */
 	public void setReputation(long reputation) {
 		this.reputation = reputation;
 	}
 	/**
-	 * @param user_id the user_id to set
+	 * @param user_id le user_id qui va etre set
 	 */
 	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 	/**
-	 * @param user_type the user_type to set
+	 * @param user_type le user_type qui va etre set
 	 */
 	public void setUser_type(String user_type) {
 		this.user_type = user_type;
 	}
 	/**
-	 * @param accept_rate the accept_rate to set
+	 * @param accept_rate le accept_rate qui va etre set
 	 */
 	public void setAccept_rate(float accept_rate) {
 		this.accept_rate = accept_rate;
 	}
 	/**
-	 * @param profile_image the profile_image to set
+	 * @param profile_image la profile_image qui va etre set
 	 */
 	public void setProfile_image(String profile_image) {
 		this.profile_image = profile_image;
 	}
 	/**
-	 * @param display_name the display_name to set
+	 * @param display_name le display_name qui va etre set
 	 */
 	public void setDisplay_name(String display_name) {
 		this.display_name = display_name;
 	}
 	/**
-	 * @param link the link to set
+	 * @param link le link qui va etre set
 	 */
 	public void setLink(String link) {
 		this.link = link;
 	}
 	
 	/**
-	 * la methode permet de transformer un map de json_donnee au objet user
-	 * @param user un HashMap qu'on obtient par le convertisseur de json qui enregistre des information d'utilisateur
-	 * @return un objet user a correspond.
+	 * la methode permet de transformer un map de json_donnee en objet user
+	 * @param user un HashMap qu'on obtient avec le convertisseur de json qui enregistre des informations d'utilisateur
+	 * @return un objet user qui correspond.
 	 */
 	
 	public static User MaptoC_User(HashMap<String,Object> user) {
