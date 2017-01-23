@@ -13,7 +13,21 @@ import Connection_HTTP.HttpRequest;
 import Data_Structure.JSON_Converter;
 import fonctionalite_Dave.fonction_Dave;
 
+/**
+ * Classe regroupant les users stories de Bob
+ * 
+ * @author Etoile-TSE
+ *
+ */
 public class fonctionBob {
+	/**
+	 * @param mots
+	 *            ou phrase de la recherche
+	 * @return tableau contenant la liste des questions, le liens des questions
+	 *         et les tags correspondant aux questions
+	 * @throws IOException
+	 * @throws JSONException
+	 */
 	public ArrayList<String[]> Bob1(String mots) throws IOException, JSONException {
 
 		ArrayList<String[]> tab = new ArrayList<String[]>();
@@ -41,6 +55,14 @@ public class fonctionBob {
 		return tab;
 	}
 
+	/**
+	 * @param numero
+	 *            d'identification de l'utilisateur
+	 * @return tableau contenant les pseudos des utilisateurs et le liens de
+	 *         leurs profils
+	 * @throws IOException
+	 * @throws JSONException
+	 */
 	public ArrayList<String[]> Bob2(String id) throws IOException, JSONException {
 		ArrayList<String[]> tab = new ArrayList<String[]>();
 		String requete = id + "/top-tags?page=1&pagesize=3&site=stackoverflow";
@@ -73,7 +95,7 @@ public class fonctionBob {
 																												// les
 																												// tops
 																												// tags
-																												// �
+																												// ï¿½
 																												// stack
 																												// overflow
 		HashMap<String, Object> JSON_Map_tags = JSON_Converter.jsonToMap(json_str_top_tags);// les
@@ -90,7 +112,7 @@ public class fonctionBob {
 																							// string
 																							// plus
 																							// facile
-																							// �
+																							// ï¿½
 																							// utiliser
 		// System.out.println(JSON_Map_tags);
 		Object it = JSON_Map_tags.get("items");
@@ -145,12 +167,12 @@ public class fonctionBob {
 																											// reponses
 		// System.out.println(questions);
 
-		String titres[] = new String[20];// Je stoque les titre l�
-		String liens[] = new String[20];// Je stoque les liens l�
-		String tags[] = new String[20];// Je stoque les tags l�
+		String titres[] = new String[20];// Je stoque les titre lï¿½
+		String liens[] = new String[20];// Je stoque les liens lï¿½
+		String tags[] = new String[20];// Je stoque les tags lï¿½
 		int pos = 0;
 		int nb = 0;
-		String bidule = new String("true");// sers � verifier si la question a
+		String bidule = new String("true");// sers ï¿½ verifier si la question a
 											// deja des reponses
 
 		for (int i = 0; i < 50; i++) {
@@ -170,24 +192,25 @@ public class fonctionBob {
 																			// deja
 																			// des
 																			// reponses
-				titres[nb] = Qtitle(questions, nb + 1);// on stoque les libell閟
-														// des questions l�
+				titres[nb] = Qtitle(questions, nb + 1);// on stoque les
+														// libellé–Ÿ
+														// des questions lï¿½
 				// System.out.println("question: ");
 				// System.out.println(titres[nb]);
 				liens[nb] = Qlink(questions, nb + 1);// on stoque les liens vers
-														// les questions l�
+														// les questions lï¿½
 				// System.out.println(liens[nb]);
 				tags[nb] = Qtags(questions, nb + 1);// on stoque les tags des
-													// questions l�
+													// questions lï¿½
 				// System.out.println("tags: ");
 				// System.out.println(tags[nb]);
 				nb++;
 			}
 			if (nb == 7)
-				break;// lorsque l'on a obtenu 7 questions, on arr阾e
+				break;// lorsque l'on a obtenu 7 questions, on arré˜¾e
 		}
 		req = "page=1&pagesize=50&order=desc&sort=activity&tagged=" + tag2 + "&site=stackoverflow";
-		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions", req, true);// m阭e
+		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions", req, true);// mé˜­e
 																									// chose
 																									// avec
 																									// le
@@ -214,7 +237,7 @@ public class fonctionBob {
 				break;
 		}
 		req = "page=1&pagesize=50&order=desc&sort=activity&tagged=" + tag3 + "&site=stackoverflow";
-		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions", req, true);// m阭e
+		questions = HttpRequest.sendGet("https://api.stackexchange.com/2.2/questions", req, true);// mé˜­e
 																									// chose
 																									// avec
 																									// le
@@ -239,7 +262,7 @@ public class fonctionBob {
 			if (nb == 6)
 				break;
 		}
-		tab.clear();// on retourne les r閟ultats
+		tab.clear();// on retourne les ré–Ÿultats
 		tab.add(titres);
 		tab.add(liens);
 		tab.add(tags);
@@ -252,7 +275,8 @@ public class fonctionBob {
 	}
 
 	public static String Qtags(String q, int num) {// cette fonction cherche la
-													// num鑝e liste de tags dans
+													// numé‘�e liste de tags
+													// dans
 													// le string de retour de
 													// stack overflow q et la
 													// retourne
@@ -267,7 +291,7 @@ public class fonctionBob {
 	}
 
 	public static String Qlink(String q, int num) {// cette fonction cherche le
-													// num鑝e lien dans le
+													// numé‘�e lien dans le
 													// string q de retour de
 													// stack overflowet la
 													// retourne
@@ -282,7 +306,7 @@ public class fonctionBob {
 	}
 
 	public static String Qtitle(String q, int num) {// cette fonction cherche le
-													// num鑝e libell� de
+													// numé‘�e libellï¿½ de
 													// question dans le string q
 													// de retour de stack
 													// overflowet la retourne

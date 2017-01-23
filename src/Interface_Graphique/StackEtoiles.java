@@ -14,6 +14,11 @@ import javax.swing.JScrollPane;
 
 import org.json.JSONException;
 
+/**
+ * Affichage de la fenetre
+ * 
+ * @author Etoile-TSE
+ */
 public class StackEtoiles {
 	static JFrame frame = new JFrame("StackEtoiles");
 	static JPanel panel = new JPanel();
@@ -43,6 +48,11 @@ public class StackEtoiles {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * Ecouteur permettant de changer de user-stories
+	 * 
+	 * @author Etoile-TSE
+	 */
 	public class EcouteurFonctions implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {

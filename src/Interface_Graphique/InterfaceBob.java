@@ -18,6 +18,12 @@ import org.json.JSONException;
 
 import fonctionalite_Bob.fonctionBob;
 
+/**
+ * Element d'affichage des users stories de Bob
+ * 
+ * @author Etoile-TSE
+ *
+ */
 public class InterfaceBob {
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel("Entrez votre numéro d'identifiant ou des mots-clés pour la recherche");
@@ -55,6 +61,11 @@ public class InterfaceBob {
 		result.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
 	}
 
+	/**
+	 * Ecouteur permettant une action lors de l'appui sur un bouton
+	 * 
+	 * @author Etoile-TSE
+	 */
 	public class Ecouteur implements ActionListener {
 
 		@Override

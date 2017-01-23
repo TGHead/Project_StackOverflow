@@ -16,12 +16,17 @@ import org.json.JSONException;
 
 import fonctionalite_Alice.fonction_Alice;
 
+/**
+ * Element d'affichage des users stories d'Alice
+ * 
+ * @author Etoile-TSE
+ */
 public class InterfaceAlice {
 	JPanel panel = new JPanel();
-	JLabel label = new JLabel("Entrez votre numé–žo d'identifiant");
+	JLabel label = new JLabel("Entrez votre numéro d'identifiant");
 	JButton button1 = new JButton("Chercher des nouvelles questions");
 	JButton button2 = new JButton("Chercher les utilisateurs ayant plus de badges");
-	JButton button3 = new JButton("Trier les questions auxquelles j'ai ré–œondu");
+	JButton button3 = new JButton("Trier les questions auxquelles j'ai répondu");
 	JTextField text = new JTextField(20);
 	JEditorPane result = new JEditorPane();
 
@@ -53,6 +58,11 @@ public class InterfaceAlice {
 		result.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
 	}
 
+	/**
+	 * Ecouteur permettant une action lors de l'appui sur un bouton
+	 * 
+	 * @author Etoile-TSE
+	 */
 	public class Ecouteur implements ActionListener {
 
 		@Override
@@ -83,7 +93,7 @@ public class InterfaceAlice {
 
 				if (tab.isEmpty()) {
 					err = true;
-					s = "<b style=\"color:#FF0000\">Le numé–žo d'identifiant " + text.getText()
+					s = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + text.getText()
 							+ " n'existe pas</b><br>";
 				} else {
 
@@ -108,7 +118,7 @@ public class InterfaceAlice {
 				break;
 			case 1:
 				err = true;
-				s = "Pas encore implé–™entï¿½";
+				s = "Pas encore implémenté";
 				result.setText(s);
 				StackEtoiles.jsp.setViewportView(result);
 				result.setCaretPosition(0);
@@ -128,7 +138,7 @@ public class InterfaceAlice {
 				ArrayList<String[]> tab1 = new ArrayList<String[]>();
 				try {
 					tab1 = f.Alice3(text.getText());
-					//res = true;
+					// res = true;
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -138,8 +148,8 @@ public class InterfaceAlice {
 				}
 
 				if (tab1.isEmpty()) {
-					//res = false;
-					s = "<b style=\"color:#FF0000\">Le numï¿½ro d'identifiant " + text.getText()
+					// res = false;
+					s = "<b style=\"color:#FF0000\">Le numéro d'identifiant " + text.getText()
 							+ " n'existe pas</b><br>";
 				} else {
 

@@ -18,15 +18,25 @@ import org.json.JSONException;
 
 import fonctionalite_Dave.fonction_Dave;
 
+/**
+ * Element d'affichage des users stories de Dave
+ * 
+ * @author Etoile-TSE
+ */
 public class InterfaceDave {
 	JPanel panel = new JPanel();
-	JLabel label = new JLabel("Entrez le(s) sujet(s) ï¿½ rechercher");
+	JLabel label = new JLabel("Entrez le(s) sujet(s) à rechercher");
 	JButton button1 = new JButton("Trier par score obtenu");
 	JButton button2 = new JButton("Trier par nombre de post");
 	JTextField text = new JTextField(20);
 	JEditorPane result = new JEditorPane();
 
 	// Constructeur
+	/**
+	 * 
+	 * @throws IOException
+	 * @throws JSONException
+	 */
 	public InterfaceDave() throws IOException, JSONException {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		JPanel panelLabel = new JPanel();
@@ -53,6 +63,11 @@ public class InterfaceDave {
 
 	}
 
+	/**
+	 * Ecouteur permettant une action lors de l'appui sur un bouton
+	 * 
+	 * @author Etoile-TSE
+	 */
 	public class Ecouteur implements ActionListener {
 
 		@Override
