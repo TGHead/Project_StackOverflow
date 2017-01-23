@@ -15,7 +15,7 @@ import Data_Structure.Tag;
 import Data_Structure.TagsAnswerers;
 
 /**
- * Ce class realiser des fontionnalite de Dave
+ * Ce class realise des fontionnalites de Dave
  * @author L'Etoile-TSE
  *
  */
@@ -23,13 +23,13 @@ import Data_Structure.TagsAnswerers;
 public class fonction_Dave {
 	
 	/**
-	 * rappel par UI pour resliser des fonctionnalites de Dave
+	 * rappel par l'UI pour realiser des fonctionnalites de Dave
 	 * 
-	 * @param sujet_list tag saisir par UI
-	 * @param nombre le nombre d'utilisateur en chercher
+	 * @param sujet_list tag saisi par l'UI
+	 * @param nombre le nombre d'utilisateurs a chercher
 	 * @param choix le choix indique l'ordre de resultat
 	 * @see Select_Table_PluralTagsAnswerers
-	 * @return Une liste de unsemble des string pour UI
+	 * @return Une liste d'ensembles de string pour l'UI
 	 * @throws IOException
 	 * @throws JSONException
 	 */

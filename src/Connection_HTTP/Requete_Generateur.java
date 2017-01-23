@@ -2,16 +2,16 @@ package Connection_HTTP;
 
 
 /**
-* Un class pour prendre quelques methodes differentes pour generer des requetes pour envoyer au serveur <br/>
-* Les requetes correspondent des formats de L'API de la site.
+* Une classe  utilisant des methodes differentes pour generer des requetes a envoyer au serveur <br/>
+* Les requetes correspondent au format API du site.
 * @author L'Etoile-TSE
 */
 
 public class Requete_Generateur {
 	
 	/**
-	* renvoyer la tete de URL pour L'API sur tags
-	* @return Un string constitue la tete de URL pour L'API sur tags
+	* renvoyer la partie de l'URL qui correspond aux tags pour L'API
+	* @return la partie de l'URL qui correspond aux tags pour L'API
 	*/
 	
 	public static String Fonction_Tags() {
@@ -20,10 +20,10 @@ public class Requete_Generateur {
 	}
 	
 	/**
-	* renvoyer l'option top-answerers sous L'API de tags
-	* @param flag un entier pour indiquer la duration qu'on prend en compte :<br/> 1-->all_time; 2-->month
-	* @param tag le nom de tag qu'on interesse.
-	* @return Un string constitue une partie de URL pour L'API sur tags de l'option : top-answerers
+	* renvoyer l'URL de l'API qui correspond aux top answerers pour un tag et une periode temporelle precis
+	* @param flag un entier pour indiquer la duree qu'on prend en compte :<br/> 1-->all_time; 2-->month
+	* @param tag le nom de tag qui nous interesse.
+	* @return Un string qui est l'URL de l'API qui correspond aux top answerers pour un tag et une periode temporelle precis
 	*/
 	
 	public static String Fonction_Tags_TopAnswerers(int flag, String tag){
@@ -39,8 +39,8 @@ public class Requete_Generateur {
 	}
 	
 	/**
-	* renvoyer la tete de URL pour L'API sur users
-	* @return Un string constitue la tete de URL pour L'API sur users
+	* renvoyer la partie de l'URL qui correspond aux users pour L'API
+	* @return Un string qui est la partie de l'URL qui correspond aux users pour L'API
 	*/
 	
 	public static String Fonction_Users() {
@@ -48,9 +48,9 @@ public class Requete_Generateur {
 	}
 	
 	/**
-	* renvoyer l'option top-tags sous L'API de users
-	* @param user_id l'identifiant d'utilisateur qu'on interesse.
-	* @return Un string constitue une partie de URL pour L'API sur users de l'option : top-tags
+	* renvoyer une partie de l'URL de l'API qui correspond aux top tags pour un utilisateur donne
+	* @param user_id l'identifiant d'utilisateur qui nous interesse.
+	* @return Un string qui est une partie de l'URL de l'API qui correspond aux top tags pour un utilisateur donne
 	*/
 	
 	public static String Fonction_Users_TopTags(String user_id) {
@@ -58,9 +58,9 @@ public class Requete_Generateur {
 	}
 	
 	/**
-	* renvoyer l'option answers sous L'API de users
-	* @param user_id l'identifiant d'utilisateur qu'on interesse.
-	* @return Un string constitue une partie de URL pour L'API sur users de l'option : answers
+	* renvoyer une partie de l'URL de l'API qui correspond aux reponses laisse par un utilisateur donne
+	* @param user_id l'identifiant d'utilisateur qui nous interesse.
+	* @return Un string qui est une partie de l'URL de l'API qui correspond aux reponses laisse par un utilisateur donne
 	*/
 	
 	public static String Fonction_Users_Answers(String user_id) {
@@ -68,9 +68,9 @@ public class Requete_Generateur {
 	}
 	
 	/**
-	* renvoyer l'option questions sous L'API de answers
-	* @param ans_id l'identifiant d'answer qu'on interesse.
-	* @return Un string constitue une entiere de URL pour L'API sur answers de l'option : questions
+	* renvoyer l'option questions de L'API pour les answers
+	* @param ans_id l'identifiant d'answer qui nous interesse.
+	* @return Un string qui est l'URL entiere de l'API sur answers pour l'option : questions
 	*/
 	
 	public static String Fonction_Answers_Questions(int ans_id) {
@@ -78,10 +78,10 @@ public class Requete_Generateur {
 	}
 	
 	/**
-	* generer des parametres de GET sous L'API.
-	* @param page le nombre de page qu'on demande en format de String.
-	* @param pagesize le nombre des enregistements par chaque page en format de String.
-	* @return Un string constitue le parametre de URL pour L'API.
+	* generer des parametres de GET pour L'API, avec des parametres d'entree au format String
+	* @param page le nombre de pages qu'on demande au format String.
+	* @param pagesize le nombre d'enregistements pour chaque page au format String.
+	* @return Un string constituant le parametre de URL pour L'API.
 	*/
 	
 	public static String GET_Parameters(String page,String pagesize) {
@@ -90,9 +90,9 @@ public class Requete_Generateur {
 	}
 	
 	/**
-	* generer des parametres de GET sous L'API.
-	* @param page le nombre de page qu'on demande en format d'entier.
-	* @param pagesize le nombre des enregistements par chaque page en format d'entier.
+	* generer des parametres de GET pour L'API, avec des parametres d'entree au format entier
+	* @param page le nombre de page qu'on demande au format d'entier.
+	* @param pagesize le nombre d'enregistements par chaque page au format d'entier.
 	* @return Un string constitue le parametre de URL pour L'API.
 	*/
 	

@@ -11,7 +11,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
 
 /**
-* Un class pour envoyer des requetes au web serveur de Stackoverflow  <br/>
+* Une class pour envoyer des requetes au web serveur de Stackoverflow  <br/>
 * Par la methode HTTP : GET 
 * @author L'Etoile-TSE
 */
@@ -21,12 +21,12 @@ public class HttpRequest {
 	 * Envoyer un request GET a un certain URL et decompresser des resultats.
 	 * 
 	 * @param url
-	 *            une partie de URL pour appel le API
+	 *            une partie de l'URL pour appeller l'API
 	 * @param param
 	 *            des parametres details sous le format:
 	 *            name1=value1&name2=value2
 	 * @param x indique s'il y a besoin d'ajouter un point d'interrogation
-	 * @return des resultats que le site retourne
+	 * @return les resultats que le site retourne
 	 * @throws IOException
 	 */
 	public static String sendGet(String url, String param, boolean x) throws IOException {
